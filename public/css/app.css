@@ -19,6 +19,14 @@ body {
   background-size: cover;
 }
 
+#sale-manage {
+  margin-top: 100px;
+}
+
+#yard-sale {
+  margin-top: 100px;
+}
+
 #tips {
   margin-top: 100px;
 }

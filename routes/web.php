@@ -16,11 +16,11 @@ Route::get('/', function () {
 })->name('home');
 
 Route::get('yard-sales', function () {
-    return view('home');
+    return view('yard-sales');
 })->name('yard.sales');
 
 Route::get('sale-manage', function () {
-    return view('home');
+    return view('sale-manage');
 })->name('sale.manage');
 
 Route::get('tips', function () {
