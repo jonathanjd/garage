@@ -6,7 +6,7 @@
 @include('include.navbar')
 
 <!--  Section Header -->
-<section id="header">
+<section id="header" class="mt-5">
     <div class="jumbotron jumbotron-fluid">
         <div class="container">
             <h1 class="text-center display-4">Find garage sales near you!</h1>
