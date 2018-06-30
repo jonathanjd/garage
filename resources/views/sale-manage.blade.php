@@ -1,5 +1,5 @@
 @extends('layouts.base')
-@section('title', 'Contact')
+@section('title', 'Sale Manage')
 @section('content')
 
 <!-- NavBar -->

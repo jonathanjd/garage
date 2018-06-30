@@ -30,3 +30,11 @@ Route::get('tips', function () {
 Route::get('contact', function () {
     return view('contacto');
 })->name('contact');
+
+Route::get('login', function () {
+    return view('login');
+});
+
+Route::get('register', function () {
+    return view('register');
+});
