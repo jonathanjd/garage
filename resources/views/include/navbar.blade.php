@@ -7,22 +7,22 @@
 
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
-      <li class="nav-item active">
-        <a class="nav-link" href="#">Home
+      <li class="nav-item {{ url()->current() == url('/') ? 'active' : '' }}">
+      <a class="nav-link" href="{{ route('home') }}">Home
           <span class="sr-only">(current)</span>
         </a>
       </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">I'm a Shopper</a>
+      <li class="nav-item {{ url()->current() == url('yard-sales') ? 'active' : '' }}">
+        <a class="nav-link" href="{{ route('yard.sales') }}">I'm a Shopper</a>
       </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">I'm a Seller</a>
+      <li class="nav-item {{ url()->current() == url('sale-manage') ? 'active' : '' }}">
+        <a class="nav-link" href="{{ route('sale.manage') }}">I'm a Seller</a>
       </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">Tips</a>
+      <li class="nav-item {{ url()->current() == url('tips') ? 'active' : '' }}">
+        <a class="nav-link" href="{{ route('tips') }}">Tips</a>
       </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">Contact</a>
+      <li class="nav-item {{ url()->current() == url('contact') ? 'active' : '' }}">
+        <a class="nav-link" href="{{ route('contact') }}">Contact</a>
       </li>
 
     </ul>
