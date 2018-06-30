@@ -24,9 +24,9 @@ Route::get('sale-manage', function () {
 })->name('sale.manage');
 
 Route::get('tips', function () {
-    return view('home');
+    return view('tips');
 })->name('tips');
 
 Route::get('contact', function () {
-    return view('home');
+    return view('contacto');
 })->name('contact');
