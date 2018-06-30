@@ -13,4 +13,20 @@
 
 Route::get('/', function () {
     return view('home');
-});
+})->name('home');
+
+Route::get('yard-sales', function () {
+    return view('home');
+})->name('yard.sales');
+
+Route::get('sale-manage', function () {
+    return view('home');
+})->name('sale.manage');
+
+Route::get('tips', function () {
+    return view('home');
+})->name('tips');
+
+Route::get('contact', function () {
+    return view('home');
+})->name('contact');
