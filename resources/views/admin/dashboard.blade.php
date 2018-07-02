@@ -1,5 +1,5 @@
 @extends('layouts.base')
-@section('title', 'Sale Manage')
+@section('title', 'DashBoard')
 @section('content')
 
 <!-- NavBar -->
@@ -10,9 +10,10 @@
   <div class="container">
     <div class="row">
       <div class="col-md-12">
-        <h1>Post Your Garage Sale For Free</h1>
+        <h1>DashBoard</h1>
+        <p>Welcome, {{ auth()->user()->name }}</p>
         <hr>
-        <div id="saleManage"></div>
+        <div id="dashBoardClient"></div>
       </div>
     </div>
   </div>

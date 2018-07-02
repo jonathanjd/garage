@@ -35,6 +35,10 @@ Route::get('login', function () {
     return view('login');
 });
 
-Route::get('register', function () {
-    return view('register');
+Auth::routes();
+
+Route::group(['prefix' => 'admin'], function () {
+    route::get('dashboard', function () {
+        return view('admin.dashboard');
+    })->name('dashboard');
 });

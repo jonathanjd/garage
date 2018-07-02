@@ -27,12 +27,28 @@
 
     </ul>
     <ul class="navbar-nav justify-content-end">
+      @guest
+        <li class="nav-item">
+        <a class="nav-link" href="{{ url('login') }}">Sign In</a>
+        </li>
+        <li class="nav-item">
+        <a class="nav-link" href="{{ url('register') }}">Register</a>
+        </li>
+      @else
       <li class="nav-item">
-      <a class="nav-link" href="{{ url('login') }}">Sign In</a>
-      </li>
-      <li class="nav-item">
-      <a class="nav-link" href="{{ url('register') }}">Register</a>
-      </li>
+          <a class="nav-link" href="{{ route('dashboard') }}">Dashboard</a>
+          </li>
+          <li class="nav-item">
+          <a
+            class="nav-link"
+            href="{{ route('logout') }}"
+            onclick="event.preventDefault();document.getElementById('logout-form').submit();"
+          >Logout</a>
+          <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+              {{ csrf_field() }}
+          </form>
+          </li>
+      @endguest
     </ul>
   </div>
 </nav>

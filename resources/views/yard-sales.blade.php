@@ -12,6 +12,7 @@
       <div class="col-md-12">
         <h1>I'm a Shopper</h1>
         <hr>
+        <div id="yardSale"></div>
       </div>
     </div>
   </div>
@@ -19,4 +20,7 @@
 
 @include('include.footer')
 
+@endsection
+@section('script')
+<script src="{{ asset('js/app.js') }}"></script>
 @endsection
