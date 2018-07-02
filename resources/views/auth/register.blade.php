@@ -48,6 +48,7 @@
               <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
                 <label for="password">Password</label>
                 <input type="password" class="form-control" name="password" required>
+                @if ($errors->has('password'))
                   <div class="invalid-feedback">
                       <strong>{{ $errors->first('password') }}</strong>
                   </div>

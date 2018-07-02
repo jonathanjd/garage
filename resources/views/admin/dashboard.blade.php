@@ -13,7 +13,7 @@
         <h1>DashBoard</h1>
         <p>Welcome, {{ auth()->user()->name }}</p>
         <hr>
-        <div id="dashBoardClient"></div>
+        <dash-board-client></dash-board-client>
       </div>
     </div>
   </div>

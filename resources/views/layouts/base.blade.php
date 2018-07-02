@@ -12,7 +12,9 @@
     <title>App Garage - @yield('title')</title>
   </head>
   <body>
-    @yield('content')
+    <div id="app">
+      @yield('content')
+    </div>
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="{{ asset('js/jquery-3.3.1.min.js') }}"></script>

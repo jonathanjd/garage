@@ -35,7 +35,7 @@
         <a class="nav-link" href="{{ url('register') }}">Register</a>
         </li>
       @else
-      <li class="nav-item">
+      <li class="nav-item {{ url()->current() == url('admin/dashboard') ? 'active' : '' }}">
           <a class="nav-link" href="{{ route('dashboard') }}">Dashboard</a>
           </li>
           <li class="nav-item">

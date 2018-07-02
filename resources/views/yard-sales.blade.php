@@ -12,7 +12,7 @@
       <div class="col-md-12">
         <h1>I'm a Shopper</h1>
         <hr>
-        <div id="yardSale"></div>
+        <yard-sale></yard-sale>
       </div>
     </div>
   </div>

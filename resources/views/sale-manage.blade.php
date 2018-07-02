@@ -12,7 +12,7 @@
       <div class="col-md-12">
         <h1>Post Your Garage Sale For Free</h1>
         <hr>
-        <div id="saleManage"></div>
+        <sale-manage></sale-manage>
       </div>
     </div>
   </div>
