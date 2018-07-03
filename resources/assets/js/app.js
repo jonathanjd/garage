@@ -7,12 +7,16 @@
 require('./bootstrap');
 
 window.Vue = require('vue');
+Vue.use(require('vue-moment'));
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
+
+window.EventBus = new Vue();
+import { store } from './store';
 
 import YardSale from './components/YardSale.vue'
 import SaleManage from './components/SaleManage.vue'
@@ -22,5 +26,6 @@ Vue.component('SaleManage', SaleManage);
 Vue.component('DashBoardClient', DashBoardClient);
 
 const app = new Vue({
-    el: '#app'
+    el: '#app',
+    store,
 });

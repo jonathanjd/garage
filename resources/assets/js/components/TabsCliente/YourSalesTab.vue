@@ -11,7 +11,7 @@
               <div class="card-body">
                 <h3>Your Sales</h3>
                 <p>You do not have any sales scheduled.</p>
-                <button class="btn btn-success">Add Sale</button>
+                <button @click="showSaleManage" class="btn btn-success">Add Sale</button>
               </div>
             </div>
           </div>
@@ -22,6 +22,12 @@
 <script>
 
 export default {
+
+  methods: {
+    showSaleManage() {
+      EventBus.$emit('changeMyDashboard');
+    }
+  }
 
 }
 </script>
