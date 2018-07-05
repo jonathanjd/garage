@@ -34,6 +34,9 @@
         <app-your-sales-tab></app-your-sales-tab>
       </div>
     </template>
+    <template v-else-if="showMyGarage">
+      <app-garage></app-garage>
+    </template>
     <template v-else>
       <app-sale-manage></app-sale-manage>
     </template>
@@ -44,11 +47,13 @@
 import AccountSettings from './TabsCliente/AccountSettings';
 import YourSalesTab from './TabsCliente/YourSalesTab';
 import SaleManage from './SaleManage';
+import Garage from './Garage';
 export default {
 
   data(){
     return {
       myDashboard: true,
+      myGarage: false
     }
   },
 
@@ -59,18 +64,26 @@ export default {
     EventBus.$on('showMyDashboard', () => {
       this.myDashboard = true;
     });
+    EventBus.$on('showGarage', (payload) => {
+      this.myGarage = payload;
+    });
   },
 
   computed: {
     showDashboard() {
       return this.myDashboard;
+    },
+
+    showMyGarage(){
+      return this.myGarage;
     }
   },
 
   components: {
     appAccountSettings: AccountSettings,
     appYourSalesTab: YourSalesTab,
-    appSaleManage: SaleManage
+    appSaleManage: SaleManage,
+    appGarage: Garage
   }
 
 }

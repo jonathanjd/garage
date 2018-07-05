@@ -1,12 +1,13 @@
 <template>
   <div class="card border-secondary mb-3">
-    <div class="card-header"><a href="">{{ myGarage.title }}</a></div>
+    <div class="card-header">{{ myGarage.title }}</div>
     <div class="card-body text-secondary">
       <h5 class="card-title"></h5>
       <p class="card-text">{{ myLocationInfo }}</p>
       <p><strong>Date:</strong> {{ myDateInfo }}</p>
       <p><strong>Hour:</strong> {{ myHourInfo }}</p>
       <div class="text-right">
+        <button @click="show" class="btn btn-info">Show</button>
         <button class="btn btn-warning">Edit</button>
         <button @click="destroy(myGarage.id)" class="btn btn-outline-danger">Delete</button>
       </div>
@@ -34,6 +35,12 @@ export default {
   },
 
   methods: {
+
+    show(){
+      EventBus.$emit('changeMyDashboard');
+      EventBus.$emit('showGarage', true);
+    },
+
     destroy(id) {
       axios.delete('/admin/api/garage/'.concat(id)).then( () => {
 
