@@ -23,4 +23,7 @@
 @endsection
 @section('script')
 <script src="{{ asset('js/app.js') }}"></script>
+<script async defer
+          src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCZvuQnalxu6pzgdPVSpS2j3dEvP_hv8NM">
+</script>
 @endsection

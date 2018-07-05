@@ -33,8 +33,10 @@ Route::get('contact', function () {
 
 Auth::routes();
 
-Route::group(['prefix' => 'admin'], function () {
+Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
     route::get('dashboard', function () {
         return view('admin.dashboard');
     })->name('dashboard');
+    Route::get('/api/garage/by-user', 'GarageController@byUser');
+    Route::apiResource('/api/garage', 'GarageController');
 });

@@ -6,7 +6,7 @@
         <p>Please enter the address of your sale in the form below and click Search. Once verified, click Next to proceed.</p>
         <app-message v-if="showMessage" :myTitle="messageProps.title" :myTypeAlert="messageProps.type"></app-message>
       </div>
-      <div class="card mt-4" key="box2">
+      <div class="card border-primary mt-4" key="box2">
         <div class="card-body">
           <h4>Sale Location</h4>
           <form>
@@ -27,16 +27,16 @@
                 <input type="text" v-model="formData.postalCode" class="form-control" placeholder="Postal Code">
               </div>
             </div>
-            <button class="btn btn-primary my-4" @click.prevent="search" :disabled="showRefineLocation">Search</button>
+            <button class="btn btn-primary my-4" @click.prevent="search" :disabled="validateSearch">Search</button>
           </form>
         </div>
       </div>
-      <div class="card mt-4" v-if="showRefineLocation" key="box3">
+      <div class="card border-primary mt-4" v-if="showRefineLocation" key="box3">
         <div class="card-body">
           <h4>Refine Location</h4>
           <p>Is the location of the sale correct on the map below? If not, please drag the marker to the correct location.</p>
           <app-map :myLocationSearch="locationSearch"></app-map>
-          <button @click="next" class="btn btn-primary">Next</button>
+          <button @click="next" class="btn btn-primary mt-2">Next</button>
         </div>
       </div>
     </transition-group>
@@ -46,7 +46,7 @@
 <script>
 import states from '../../data/states.js';
 import Message from '../alert/Message';
-import Map from './map';
+import Map from './Map';
 export default {
   data(){
     return{
@@ -73,6 +73,12 @@ export default {
     });
   },
 
+  computed: {
+    validateSearch() {
+      return this.formData.address == '' || this.formData.city == '' || this.formData.postalCode == '' || this.formData.state == 'selected';
+    }
+  },
+
   mounted() {
     this.locationTest();
   },
@@ -81,6 +87,7 @@ export default {
 
     next(){
       EventBus.$emit('changeComponent', 'appSaleDetails', '20%');
+      this.$store.dispatch('loadGarageLocationBasic', this.formData);
     },
 
     search() {

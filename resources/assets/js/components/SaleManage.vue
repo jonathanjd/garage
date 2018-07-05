@@ -20,6 +20,8 @@
 
 import SaleLocation from './Step/SaleLocation';
 import SaleDetails from './Step/SaleDetails';
+import SalePhotos from './Step/SalePhotos';
+import SaleSumamry from './Step/SaleSummary';
 
 export default {
 
@@ -46,7 +48,9 @@ export default {
 
   components: {
     appSaleLocation: SaleLocation,
-    appSaleDetails: SaleDetails
+    appSaleDetails: SaleDetails,
+    appSalePhotos: SalePhotos,
+    appSaleSumamry: SaleSumamry
   }
 
 }

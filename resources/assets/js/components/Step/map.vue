@@ -51,7 +51,7 @@ export default {
 
 <style>
 .google-map {
-  width: 800px;
+  width: auto;
   height: 600px;
   margin: 0 auto;
   background: gray;
