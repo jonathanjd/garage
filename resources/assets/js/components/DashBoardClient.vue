@@ -56,6 +56,9 @@ export default {
     EventBus.$on('changeMyDashboard', () => {
       this.myDashboard = false;
     });
+    EventBus.$on('showMyDashboard', () => {
+      this.myDashboard = true;
+    });
   },
 
   computed: {

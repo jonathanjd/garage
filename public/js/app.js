@@ -49868,7 +49868,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
   },
 
   mounted: function mounted() {
-    this.locationTest();
+    //this.locationTest();
   },
 
 
@@ -54827,7 +54827,7 @@ exports = module.exports = __webpack_require__(1)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -54876,6 +54876,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
 
 
 
@@ -54886,6 +54889,26 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       myIconSave: __WEBPACK_IMPORTED_MODULE_1__fortawesome_free_solid_svg_icons__["a" /* faSave */]
     };
   },
+
+
+  computed: {
+    myFormatDateStart: function myFormatDateStart() {
+      return '' + this.$moment(this.myGarage.startDate, 'YYYY-MM-DD').format('DD MMM YYYY');
+    },
+    myFormatDateEnd: function myFormatDateEnd() {
+      return '' + this.$moment(this.myGarage.startDate, 'YYYY-MM-DD').format('DD MMM YYYY');
+    },
+    myFormatHourStart: function myFormatHourStart() {
+      return '' + this.$moment(this.myGarage.startHour, 'YYYY-MM-DD HH:mm:ss').format('HH:mm a');
+    },
+    myFormatHourEnd: function myFormatHourEnd() {
+      return '' + this.$moment(this.myGarage.endHour, 'YYYY-MM-DD HH:mm:ss').format('HH:mm a');
+    },
+    myLocationInfo: function myLocationInfo() {
+      return this.myGarage.postal + ' ' + this.myGarage.address + ', ' + this.myGarage.city + ', ' + this.myGarage.state;
+    }
+  },
+
   created: function created() {
     this.myGarage = this.$store.getters.getGarageData;
   },
@@ -54893,6 +54916,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
   methods: {
     saveGarage: function saveGarage() {
+      var _this = this;
+
       var data = {
         address: this.myGarage.address,
         city: this.myGarage.city,
@@ -54910,7 +54935,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       };
 
       axios.post('/admin/api/garage', data).then(function () {
-        console.log('Save Garage');
+        _this.$store.dispatch('loadAlertMessageTitle', 'Garage Saved');
+        _this.$store.dispatch('loadAlertMessageType', 'alert-success');
+        _this.$store.dispatch('loadAlertMessageShow', true);
+        EventBus.$emit('showMyDashboard');
       }).catch(function () {
         console.log('Error');
       });
@@ -54950,14 +54978,14 @@ var render = function() {
             _c("div", { staticClass: "col" }, [
               _c("p", [
                 _c("strong", [_vm._v("Start Date:")]),
-                _vm._v(" " + _vm._s(_vm.myGarage.startDate))
+                _vm._v(" " + _vm._s(_vm.myFormatDateStart))
               ])
             ]),
             _vm._v(" "),
             _c("div", { staticClass: "col" }, [
               _c("p", [
                 _c("strong", [_vm._v("End Date:")]),
-                _vm._v(" " + _vm._s(_vm.myGarage.endDate))
+                _vm._v(" " + _vm._s(_vm.myFormatDateEnd))
               ])
             ])
           ]),
@@ -54966,16 +54994,21 @@ var render = function() {
             _c("div", { staticClass: "col" }, [
               _c("p", [
                 _c("strong", [_vm._v("Start Hour:")]),
-                _vm._v(" " + _vm._s(_vm.myGarage.startHour))
+                _vm._v(" " + _vm._s(_vm.myFormatHourStart))
               ])
             ]),
             _vm._v(" "),
             _c("div", { staticClass: "col" }, [
               _c("p", [
                 _c("strong", [_vm._v("End Hour:")]),
-                _vm._v(" " + _vm._s(_vm.myGarage.endHour))
+                _vm._v(" " + _vm._s(_vm.myFormatHourEnd))
               ])
             ])
+          ]),
+          _vm._v(" "),
+          _c("p", [
+            _c("strong", [_vm._v("Location:")]),
+            _vm._v(" " + _vm._s(_vm.myLocationInfo) + "\r\n      ")
           ]),
           _vm._v(" "),
           _c("h3", [_vm._v("My Photos")]),
@@ -55153,7 +55186,7 @@ exports = module.exports = __webpack_require__(1)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -55227,6 +55260,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
     EventBus.$on('changeMyDashboard', function () {
       _this.myDashboard = false;
+    });
+    EventBus.$on('showMyDashboard', function () {
+      _this.myDashboard = true;
     });
   },
 

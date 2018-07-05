@@ -80,7 +80,7 @@ export default {
   },
 
   mounted() {
-    this.locationTest();
+    //this.locationTest();
   },
 
   methods: {

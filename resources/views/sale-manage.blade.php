@@ -12,7 +12,11 @@
       <div class="col-md-12">
         <h1>Post Your Garage Sale For Free</h1>
         <hr>
-        <sale-manage></sale-manage>
+        @if (auth()->check())
+          <sale-manage></sale-manage>
+        @else
+          <a href="{{ route('register') }}" class="btn btn-primary btn-block">Register</a>
+        @endif
       </div>
     </div>
   </div>

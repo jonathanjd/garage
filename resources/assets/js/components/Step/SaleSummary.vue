@@ -9,20 +9,23 @@
       <p>{{ myGarage.description }}</p>
       <div class="row">
         <div class="col">
-          <p><strong>Start Date:</strong> {{ myGarage.startDate }}</p>
+          <p><strong>Start Date:</strong> {{ myFormatDateStart }}</p>
         </div>
         <div class="col">
-          <p><strong>End Date:</strong> {{ myGarage.endDate }}</p>
+          <p><strong>End Date:</strong> {{ myFormatDateEnd }}</p>
         </div>
       </div>
       <div class="row">
         <div class="col">
-          <p><strong>Start Hour:</strong> {{ myGarage.startHour }}</p>
+          <p><strong>Start Hour:</strong> {{ myFormatHourStart }}</p>
         </div>
         <div class="col">
-          <p><strong>End Hour:</strong> {{ myGarage.endHour }}</p>
+          <p><strong>End Hour:</strong> {{ myFormatHourEnd }}</p>
         </div>
       </div>
+      <p>
+        <strong>Location:</strong> {{ myLocationInfo }}
+      </p>
       <h3>My Photos</h3>
       <hr>
     </div>
@@ -42,6 +45,24 @@ export default {
     return {
       myGarage:{},
       myIconSave: faSave
+    }
+  },
+
+  computed: {
+    myFormatDateStart(){
+      return `${this.$moment(this.myGarage.startDate, 'YYYY-MM-DD').format('DD MMM YYYY')}`
+    },
+    myFormatDateEnd(){
+      return `${this.$moment(this.myGarage.startDate, 'YYYY-MM-DD').format('DD MMM YYYY')}`
+    },
+    myFormatHourStart(){
+      return `${this.$moment(this.myGarage.startHour, 'YYYY-MM-DD HH:mm:ss').format('HH:mm a')}`
+    },
+    myFormatHourEnd(){
+      return `${this.$moment(this.myGarage.endHour, 'YYYY-MM-DD HH:mm:ss').format('HH:mm a')}`
+    },
+    myLocationInfo(){
+      return `${this.myGarage.postal} ${this.myGarage.address}, ${this.myGarage.city}, ${this.myGarage.state}`;
     }
   },
 
@@ -68,7 +89,10 @@ export default {
       };
 
       axios.post('/admin/api/garage', data).then(() =>{
-        console.log('Save Garage');
+        this.$store.dispatch('loadAlertMessageTitle', 'Garage Saved');
+        this.$store.dispatch('loadAlertMessageType', 'alert-success');
+        this.$store.dispatch('loadAlertMessageShow', true);
+        EventBus.$emit('showMyDashboard');
       }).catch(() => {
         console.log('Error');
       });
