@@ -61037,7 +61037,7 @@ exports = module.exports = __webpack_require__(1)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -61084,6 +61084,34 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
   methods: {
     show: function show() {
+
+      var LOCATION = {
+        address: this.myGarage.address,
+        city: this.myGarage.city,
+        postalCode: this.myGarage.postal,
+        state: this.myGarage.state
+      };
+      this.$store.dispatch('loadGarageLocationBasic', LOCATION);
+
+      var LAT = this.myGarage.lat;
+
+      this.$store.dispatch('loadGarageLocationLat', LAT);
+
+      var LNG = this.myGarage.lng;
+
+      this.$store.dispatch('loadGarageLocationLng', LNG);
+
+      var DATABASIC = {
+        title: this.myGarage.title,
+        description: this.myGarage.description,
+        startDate: this.myGarage.startdate,
+        endDate: this.myGarage.enddate,
+        startHour: this.myGarage.starthour,
+        endHour: this.myGarage.endhour
+      };
+
+      this.$store.dispatch('loadGarageDataBasic', DATABASIC);
+
       EventBus.$emit('changeMyDashboard');
       EventBus.$emit('showGarage', true);
     },
@@ -61287,6 +61315,21 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -61296,7 +61339,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       style: {
         height: '300px'
       },
-      zoom: 13,
+      zoom: 20,
       center: [47.413220, -1.219482],
       url: 'http://{s}.tile.osm.org/{z}/{x}/{y}.png',
       attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',
@@ -61304,6 +61347,25 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     };
   },
 
+
+  computed: {
+    myGarageData: function myGarageData() {
+      return this.$store.getters.getGarageData;
+    },
+    myCenter: function myCenter() {
+      return [this.myGarageData.location.lat, this.myGarageData.location.lng];
+    },
+    myLatLng: function myLatLng() {
+      return L.latLng(this.myGarageData.location.lat, this.myGarageData.location.lng);
+    }
+  },
+
+  methods: {
+    back: function back() {
+      EventBus.$emit('showGarage', false);
+      EventBus.$emit('showMyDashboard');
+    }
+  },
 
   components: {
     LMap: __WEBPACK_IMPORTED_MODULE_0_vue2_leaflet__["LMap"],
@@ -61321,44 +61383,125 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "card border-primary mb-3" }, [
-    _c("div", { staticClass: "card-header" }, [_vm._v("My Garage")]),
-    _vm._v(" "),
-    _c("div", { staticClass: "card-body text-primary" }, [
-      _c("div", { staticClass: "row" }, [
-        _c(
-          "div",
-          { staticClass: "col-md-12" },
-          [
-            _c(
-              "l-map",
-              {
-                style: _vm.style,
-                attrs: { zoom: _vm.zoom, center: _vm.center }
-              },
-              [
-                _c("l-tile-layer", {
-                  attrs: { url: _vm.url, attribution: _vm.attribution }
-                }),
-                _vm._v(" "),
-                _c("l-marker", { attrs: { "lat-lng": _vm.marker } })
-              ],
-              1
-            )
-          ],
-          1
-        )
-      ]),
-      _vm._v(" "),
-      _c("h5", { staticClass: "card-title" }, [_vm._v("Primary card title")]),
-      _vm._v(" "),
-      _c("p", { staticClass: "card-text" }, [
-        _vm._v(
-          "Some quick example text to build on the card title and make up the bulk of the card's content."
-        )
+  return _c(
+    "div",
+    [
+      _c("transition", { attrs: { name: "fade", appear: "" } }, [
+        _c("div", { staticClass: "card border-primary mb-3" }, [
+          _c("div", { staticClass: "card-header" }, [_vm._v("My Garage")]),
+          _vm._v(" "),
+          _c("div", { staticClass: "card-body" }, [
+            _c("div", { staticClass: "text-right" }, [
+              _c(
+                "button",
+                { staticClass: "btn btn-primary", on: { click: _vm.back } },
+                [_vm._v("Back")]
+              )
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "row" }, [
+              _c(
+                "div",
+                { staticClass: "col my-4" },
+                [
+                  _c(
+                    "l-map",
+                    {
+                      style: _vm.style,
+                      attrs: { zoom: _vm.zoom, center: _vm.myCenter }
+                    },
+                    [
+                      _c("l-tile-layer", {
+                        attrs: { url: _vm.url, attribution: _vm.attribution }
+                      }),
+                      _vm._v(" "),
+                      _c("l-marker", { attrs: { "lat-lng": _vm.myLatLng } })
+                    ],
+                    1
+                  )
+                ],
+                1
+              )
+            ]),
+            _vm._v(" "),
+            _c("h5", { staticClass: "card-title text-primary" }, [
+              _vm._v(_vm._s(_vm.myGarageData.title))
+            ]),
+            _vm._v(" "),
+            _c("p", { staticClass: "card-text" }, [
+              _vm._v(_vm._s(_vm.myGarageData.description))
+            ]),
+            _vm._v(" "),
+            _c("p", [
+              _c("strong", [_vm._v("Location:")]),
+              _vm._v(
+                " " +
+                  _vm._s(_vm.myGarageData.postal) +
+                  " " +
+                  _vm._s(_vm.myGarageData.address) +
+                  ", " +
+                  _vm._s(_vm.myGarageData.city) +
+                  ", " +
+                  _vm._s(_vm.myGarageData.state)
+              )
+            ]),
+            _vm._v(" "),
+            _c("p", [
+              _c("strong", [_vm._v("Start Date:")]),
+              _vm._v(
+                " " +
+                  _vm._s(
+                    this.$moment(
+                      _vm.myGarageData.startDate,
+                      "YYYY-MM-DD"
+                    ).format("DD MMM YYYY")
+                  )
+              )
+            ]),
+            _vm._v(" "),
+            _c("p", [
+              _c("strong", [_vm._v("End Date:")]),
+              _vm._v(
+                " " +
+                  _vm._s(
+                    this.$moment(_vm.myGarageData.endDate, "YYYY-MM-DD").format(
+                      "DD MMM YYYY"
+                    )
+                  )
+              )
+            ]),
+            _vm._v(" "),
+            _c("p", [
+              _c("strong", [_vm._v("Hour:")]),
+              _vm._v(
+                " " +
+                  _vm._s(
+                    this.$moment(_vm.myGarageData.startHour, "HH:mm:ss").format(
+                      "HH:mm a"
+                    )
+                  ) +
+                  " - " +
+                  _vm._s(
+                    this.$moment(_vm.myGarageData.endHour, "HH:mm:ss").format(
+                      "HH:mm a"
+                    )
+                  )
+              )
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "text-right" }, [
+              _c(
+                "button",
+                { staticClass: "btn btn-primary", on: { click: _vm.back } },
+                [_vm._v("Back")]
+              )
+            ])
+          ])
+        ])
       ])
-    ])
-  ])
+    ],
+    1
+  )
 }
 var staticRenderFns = []
 render._withStripped = true

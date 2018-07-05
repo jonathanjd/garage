@@ -37,6 +37,34 @@ export default {
   methods: {
 
     show(){
+
+      const LOCATION = {
+        address: this.myGarage.address,
+        city: this.myGarage.city,
+        postalCode: this.myGarage.postal,
+        state: this.myGarage.state,
+      };
+      this.$store.dispatch('loadGarageLocationBasic', LOCATION);
+
+      const LAT = this.myGarage.lat;
+
+      this.$store.dispatch('loadGarageLocationLat', LAT);
+
+      const LNG = this.myGarage.lng;
+
+      this.$store.dispatch('loadGarageLocationLng', LNG);
+
+      const DATABASIC = {
+        title: this.myGarage.title,
+        description: this.myGarage.description,
+        startDate: this.myGarage.startdate,
+        endDate: this.myGarage.enddate,
+        startHour: this.myGarage.starthour,
+        endHour: this.myGarage.endhour,
+      };
+
+      this.$store.dispatch('loadGarageDataBasic', DATABASIC);
+
       EventBus.$emit('changeMyDashboard');
       EventBus.$emit('showGarage', true);
     },
