@@ -24,10 +24,27 @@ export const store = new Vuex.Store({
       photos:[],
     },
     typeGarages:[],
-    garageByUser: []
+    garageByUser: [],
+    alertMessage: {
+      title: null,
+      type: null,
+      show: false,
+    }
   },
 
   mutations: {
+
+    setAlerMessageTitle(state, payload) {
+      state.alertMessage.title = payload;
+    },
+
+    setAlerMessageType(state, payload) {
+      state.alertMessage.type = payload;
+    },
+
+    setAlerMessageShow(state, payload) {
+      state.alertMessage.show = payload;
+    },
 
     setGarageByUser(state, payload) {
       state.garageByUser = payload;
@@ -107,11 +124,35 @@ export const store = new Vuex.Store({
 
     getGarageByUser(state){
       return state.garageByUser;
-    }
+    },
+
+    getAlertMessageTitle(state){
+      return state.alertMessage.title;
+    },
+
+    getAlertMessageType(state){
+      return state.alertMessage.type;
+    },
+
+    getAlertMessageShows(state){
+      return state.alertMessage.show;
+    },
 
   },
 
   actions: {
+
+    loadAlertMessageTitle({commit}, payload){
+      commit('setAlerMessageTitle', payload);
+    },
+
+    loadAlertMessageType({commit}, payload){
+      commit('setAlerMessageType', payload);
+    },
+
+    loadAlertMessageShow({commit}, payload) {
+      commit('setAlerMessageShow', payload);
+    },
 
     loadGarageByUser({commit}){
       return new Promise((resolve, reject) => {

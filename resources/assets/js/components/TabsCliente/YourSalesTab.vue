@@ -9,12 +9,14 @@
           <div class="col-md-12">
             <div class="card mt-4">
               <div class="card-body">
-
+                <app-message v-if="showAlertMessage" :myTitle="miAlertMessageTitle" :myTypeAlert="miAlertMessageType"></app-message>
                 <h3>Your Sales</h3>
 
-                <app-show-garage v-for="garage in myGaragesByUser" :key="garage.id" :myGarage="garage"></app-show-garage>
+                <transition-group name="fadeUp" appear>
+                  <app-show-garage v-for="garage in myGaragesByUser" :key="garage.id" :myGarage="garage"></app-show-garage>
+                </transition-group>
 
-                <p>You do not have any sales scheduled.</p>
+                <p v-if="myGaragesByUser.length == 0">You do not have any sales scheduled.</p>
                 <button @click="showSaleManage" class="btn btn-success">Add Sale</button>
               </div>
             </div>
@@ -26,14 +28,31 @@
 <script>
 
 import ShowGarage from './ShowGarage'
-
+import Message from '../alert/Message';
 export default {
 
+  data() {
+    return {
+
+    }
+  },
 
   computed: {
     myGaragesByUser() {
       return this.$store.getters.getGarageByUser;
-    }
+    },
+
+    showAlertMessage() {
+      return this.$store.getters.getAlertMessageShows;
+    },
+
+    miAlertMessageTitle() {
+      return this.$store.getters.getAlertMessageTitle;
+    },
+
+    miAlertMessageType() {
+      return this.$store.getters.getAlertMessageType;
+    },
   },
 
   created(){
@@ -51,7 +70,8 @@ export default {
   },
 
   components: {
-    appShowGarage: ShowGarage
+    appShowGarage: ShowGarage,
+    appMessage: Message
   }
 
 }

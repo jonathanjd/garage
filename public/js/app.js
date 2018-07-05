@@ -48301,10 +48301,24 @@ var store = new __WEBPACK_IMPORTED_MODULE_1_vuex__["a" /* default */].Store({
       photos: []
     },
     typeGarages: [],
-    garageByUser: []
+    garageByUser: [],
+    alertMessage: {
+      title: null,
+      type: null,
+      show: false
+    }
   },
 
   mutations: {
+    setAlerMessageTitle: function setAlerMessageTitle(state, payload) {
+      state.alertMessage.title = payload;
+    },
+    setAlerMessageType: function setAlerMessageType(state, payload) {
+      state.alertMessage.type = payload;
+    },
+    setAlerMessageShow: function setAlerMessageShow(state, payload) {
+      state.alertMessage.show = payload;
+    },
     setGarageByUser: function setGarageByUser(state, payload) {
       state.garageByUser = payload;
     },
@@ -48364,12 +48378,36 @@ var store = new __WEBPACK_IMPORTED_MODULE_1_vuex__["a" /* default */].Store({
     },
     getGarageByUser: function getGarageByUser(state) {
       return state.garageByUser;
+    },
+    getAlertMessageTitle: function getAlertMessageTitle(state) {
+      return state.alertMessage.title;
+    },
+    getAlertMessageType: function getAlertMessageType(state) {
+      return state.alertMessage.type;
+    },
+    getAlertMessageShows: function getAlertMessageShows(state) {
+      return state.alertMessage.show;
     }
   },
 
   actions: {
-    loadGarageByUser: function loadGarageByUser(_ref) {
+    loadAlertMessageTitle: function loadAlertMessageTitle(_ref, payload) {
       var commit = _ref.commit;
+
+      commit('setAlerMessageTitle', payload);
+    },
+    loadAlertMessageType: function loadAlertMessageType(_ref2, payload) {
+      var commit = _ref2.commit;
+
+      commit('setAlerMessageType', payload);
+    },
+    loadAlertMessageShow: function loadAlertMessageShow(_ref3, payload) {
+      var commit = _ref3.commit;
+
+      commit('setAlerMessageShow', payload);
+    },
+    loadGarageByUser: function loadGarageByUser(_ref4) {
+      var commit = _ref4.commit;
 
       return new Promise(function (resolve, reject) {
         axios.get('/admin/api/garage/by-user').then(function (res) {
@@ -48380,26 +48418,26 @@ var store = new __WEBPACK_IMPORTED_MODULE_1_vuex__["a" /* default */].Store({
         });
       });
     },
-    loadGarageLocationLat: function loadGarageLocationLat(_ref2, payload) {
-      var commit = _ref2.commit;
+    loadGarageLocationLat: function loadGarageLocationLat(_ref5, payload) {
+      var commit = _ref5.commit;
 
       commit('setGarageLocationLat', payload);
     },
-    loadGarageLocationLng: function loadGarageLocationLng(_ref3, payload) {
-      var commit = _ref3.commit;
+    loadGarageLocationLng: function loadGarageLocationLng(_ref6, payload) {
+      var commit = _ref6.commit;
 
       commit('setGarageLocationLng', payload);
     },
-    loadGarageLocationBasic: function loadGarageLocationBasic(_ref4, payload) {
-      var commit = _ref4.commit;
+    loadGarageLocationBasic: function loadGarageLocationBasic(_ref7, payload) {
+      var commit = _ref7.commit;
 
       commit('setGarageAddress', payload.address);
       commit('setGarageCity', payload.city);
       commit('setGarageState', payload.state);
       commit('setGaragePostal', payload.postalCode);
     },
-    loadGarageDataBasic: function loadGarageDataBasic(_ref5, payload) {
-      var commit = _ref5.commit;
+    loadGarageDataBasic: function loadGarageDataBasic(_ref8, payload) {
+      var commit = _ref8.commit;
 
       commit('setGarageTitle', payload.title);
       commit('setGarageDescription', payload.description);
@@ -48409,13 +48447,13 @@ var store = new __WEBPACK_IMPORTED_MODULE_1_vuex__["a" /* default */].Store({
       commit('setGarageStartHour', payload.startHour);
       commit('setGarageEndHour', payload.endHour);
     },
-    loadGaragePhotos: function loadGaragePhotos(_ref6, payload) {
-      var commit = _ref6.commit;
+    loadGaragePhotos: function loadGaragePhotos(_ref9, payload) {
+      var commit = _ref9.commit;
 
       commit('setGaragePhotos', payload.photos);
     },
-    loadTypeGarages: function loadTypeGarages(_ref7) {
-      var commit = _ref7.commit;
+    loadTypeGarages: function loadTypeGarages(_ref10) {
+      var commit = _ref10.commit;
 
       return new Promise(function (resolve, reject) {
 
@@ -50030,7 +50068,7 @@ exports = module.exports = __webpack_require__(1)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -50077,6 +50115,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
   methods: {
     close: function close() {
       EventBus.$emit('destroyMessage');
+      this.$store.dispatch('loadAlertMessageShow', false);
     }
   }
 
@@ -55483,7 +55522,7 @@ exports = module.exports = __webpack_require__(1)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -55496,6 +55535,10 @@ exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__ShowGarage__ = __webpack_require__(114);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__ShowGarage___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__ShowGarage__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__alert_Message__ = __webpack_require__(59);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__alert_Message___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__alert_Message__);
+//
+//
 //
 //
 //
@@ -55526,10 +55569,23 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {};
+  },
+
 
   computed: {
     myGaragesByUser: function myGaragesByUser() {
       return this.$store.getters.getGarageByUser;
+    },
+    showAlertMessage: function showAlertMessage() {
+      return this.$store.getters.getAlertMessageShows;
+    },
+    miAlertMessageTitle: function miAlertMessageTitle() {
+      return this.$store.getters.getAlertMessageTitle;
+    },
+    miAlertMessageType: function miAlertMessageType() {
+      return this.$store.getters.getAlertMessageType;
     }
   },
 
@@ -55548,7 +55604,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
   },
 
   components: {
-    appShowGarage: __WEBPACK_IMPORTED_MODULE_0__ShowGarage___default.a
+    appShowGarage: __WEBPACK_IMPORTED_MODULE_0__ShowGarage___default.a,
+    appMessage: __WEBPACK_IMPORTED_MODULE_1__alert_Message___default.a
   }
 
 });
@@ -55579,16 +55636,31 @@ var render = function() {
               "div",
               { staticClass: "card-body" },
               [
+                _vm.showAlertMessage
+                  ? _c("app-message", {
+                      attrs: {
+                        myTitle: _vm.miAlertMessageTitle,
+                        myTypeAlert: _vm.miAlertMessageType
+                      }
+                    })
+                  : _vm._e(),
+                _vm._v(" "),
                 _c("h3", [_vm._v("Your Sales")]),
                 _vm._v(" "),
-                _vm._l(_vm.myGaragesByUser, function(garage) {
-                  return _c("app-show-garage", {
-                    key: garage.id,
-                    attrs: { myGarage: garage }
+                _c(
+                  "transition-group",
+                  { attrs: { name: "fadeUp", appear: "" } },
+                  _vm._l(_vm.myGaragesByUser, function(garage) {
+                    return _c("app-show-garage", {
+                      key: garage.id,
+                      attrs: { myGarage: garage }
+                    })
                   })
-                }),
+                ),
                 _vm._v(" "),
-                _c("p", [_vm._v("You do not have any sales scheduled.")]),
+                _vm.myGaragesByUser.length == 0
+                  ? _c("p", [_vm._v("You do not have any sales scheduled.")])
+                  : _vm._e(),
                 _vm._v(" "),
                 _c(
                   "button",
@@ -55599,7 +55671,7 @@ var render = function() {
                   [_vm._v("Add Sale")]
                 )
               ],
-              2
+              1
             )
           ])
         ])
@@ -60902,7 +60974,7 @@ exports = module.exports = __webpack_require__(1)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -60944,6 +61016,22 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     myHourInfo: function myHourInfo() {
       return this.$moment(this.myGarage.starthour, 'HH:mm:ss').format('HH:mm a') + ' to ' + this.$moment(this.myGarage.endhour, 'HH:mm:ss').format('HH:mm a');
     }
+  },
+
+  methods: {
+    destroy: function destroy(id) {
+      var _this = this;
+
+      axios.delete('/admin/api/garage/'.concat(id)).then(function () {
+
+        _this.$store.dispatch('loadAlertMessageTitle', 'Garage Deleted');
+        _this.$store.dispatch('loadAlertMessageType', 'alert-success');
+        _this.$store.dispatch('loadAlertMessageShow', true);
+        _this.$store.dispatch('loadGarageByUser');
+      }).catch(function (error) {
+        console.log(error.response);
+      });
+    }
   }
 
 });
@@ -60978,24 +61066,26 @@ var render = function() {
         _vm._v(" " + _vm._s(_vm.myHourInfo))
       ]),
       _vm._v(" "),
-      _vm._m(0)
+      _c("div", { staticClass: "text-right" }, [
+        _c("button", { staticClass: "btn btn-warning" }, [_vm._v("Edit")]),
+        _vm._v(" "),
+        _c(
+          "button",
+          {
+            staticClass: "btn btn-outline-danger",
+            on: {
+              click: function($event) {
+                _vm.destroy(_vm.myGarage.id)
+              }
+            }
+          },
+          [_vm._v("Delete")]
+        )
+      ])
     ])
   ])
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "text-right" }, [
-      _c("button", { staticClass: "btn btn-warning" }, [_vm._v("Edit")]),
-      _vm._v(" "),
-      _c("button", { staticClass: "btn btn-outline-danger" }, [
-        _vm._v("Delete")
-      ])
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {

@@ -120,5 +120,8 @@ class GarageController extends Controller
     public function destroy($id)
     {
         //
+        $garage = Garage::find($id);
+        $garage->delete();
+        return response('Deleted', Response::HTTP_NO_CONTENT);
     }
 }

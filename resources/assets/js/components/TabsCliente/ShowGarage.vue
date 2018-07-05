@@ -8,7 +8,7 @@
       <p><strong>Hour:</strong> {{ myHourInfo }}</p>
       <div class="text-right">
         <button class="btn btn-warning">Edit</button>
-        <button class="btn btn-outline-danger">Delete</button>
+        <button @click="destroy(myGarage.id)" class="btn btn-outline-danger">Delete</button>
       </div>
     </div>
   </div>
@@ -31,7 +31,23 @@ export default {
     myHourInfo() {
       return `${this.$moment(this.myGarage.starthour, 'HH:mm:ss').format('HH:mm a')} to ${this.$moment(this.myGarage.endhour, 'HH:mm:ss').format('HH:mm a')}`;
     }
-  }
+  },
+
+  methods: {
+    destroy(id) {
+      axios.delete('/admin/api/garage/'.concat(id)).then( () => {
+
+        this.$store.dispatch('loadAlertMessageTitle', 'Garage Deleted');
+        this.$store.dispatch('loadAlertMessageType', 'alert-success');
+        this.$store.dispatch('loadAlertMessageShow', true);
+        this.$store.dispatch('loadGarageByUser');
+
+      }).catch( error =>{
+        console.log(error.response);
+      });
+    }
+  },
+
 
 }
 </script>

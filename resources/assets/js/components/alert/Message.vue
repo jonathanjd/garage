@@ -35,6 +35,7 @@ export default {
   methods: {
     close() {
       EventBus.$emit('destroyMessage');
+      this.$store.dispatch('loadAlertMessageShow', false);
     }
   }
 
