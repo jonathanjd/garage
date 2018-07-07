@@ -14,4 +14,5 @@ use Illuminate\Http\Request;
  */
 
 Route::apiResource('/type-garage', 'TypeGarageController');
+Route::apiResource('/state', 'StateController', ['only' => 'index']);
 

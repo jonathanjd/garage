@@ -29,10 +29,15 @@ export const store = new Vuex.Store({
       title: null,
       type: null,
       show: false,
-    }
+    },
+    listState: []
   },
 
   mutations: {
+
+    setListState(state, payload) {
+      state.listState = payload;
+    },
 
     setAlerMessageTitle(state, payload) {
       state.alertMessage.title = payload;
@@ -114,6 +119,10 @@ export const store = new Vuex.Store({
 
   getters: {
 
+    getlistState(state){
+      return state.listState;
+    },
+
     getTypeGarages(state){
       return state.typeGarages;
     },
@@ -141,6 +150,17 @@ export const store = new Vuex.Store({
   },
 
   actions: {
+
+    loadListState({commit}, payload) {
+      return new Promise((resolve, reject) => {
+        axios.get('/api/state').then( res =>{
+          commit('setListState', res.data.data);
+          resolve();
+        }).catch( () => {
+          reject();
+        });
+      });
+    },
 
     loadAlertMessageTitle({commit}, payload){
       commit('setAlerMessageTitle', payload);

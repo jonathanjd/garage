@@ -48,6 +48,8 @@ export default {
     }
   },
 
+  props: ['urlCurrent'],
+
   computed: {
     myFormatDateStart(){
       return `${this.$moment(this.myGarage.startDate, 'YYYY-MM-DD').format('DD MMM YYYY')}`
@@ -89,10 +91,16 @@ export default {
       };
 
       axios.post('/admin/api/garage', data).then(() =>{
-        this.$store.dispatch('loadAlertMessageTitle', 'Garage Saved');
-        this.$store.dispatch('loadAlertMessageType', 'alert-success');
-        this.$store.dispatch('loadAlertMessageShow', true);
-        EventBus.$emit('showMyDashboard');
+
+        if (this.urlCurrent != undefined) {
+          EventBus.$emit('changeGarageSuccess')
+        }else {
+          this.$store.dispatch('loadAlertMessageTitle', 'Garage Saved');
+          this.$store.dispatch('loadAlertMessageType', 'alert-success');
+          this.$store.dispatch('loadAlertMessageShow', true);
+          EventBus.$emit('showMyDashboard');
+        }
+
       }).catch(() => {
         console.log('Error');
       });

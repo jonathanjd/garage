@@ -13,7 +13,7 @@
         <h1>Post Your Garage Sale For Free</h1>
         <hr>
         @if (auth()->check())
-          <sale-manage></sale-manage>
+          <sale-manage url="{{ URL::current() }}"></sale-manage>
         @else
           <a href="{{ route('register') }}" class="btn btn-primary btn-block">Register</a>
         @endif
