@@ -8,29 +8,12 @@
     <div class="card border-primary mt-4" key="box2">
         <div class="card-body">
           <h4>Add Photos</h4>
-          <div class="custom-file">
-            <template v-if="multiImageUrl">
-              <div class="row">
-                <div class="col-md-4" v-for="(file, index) in files" :key="file.id">
-                  <img v-if="file.thumb" class="img-thumbnail mt-1" :src="file.thumb" width="200" height="200" />
-                </div>
-              </div>
-            </template>
-            <div class="my-btnFile">
-              <file-upload
-                class="btn btn-primary btn-block my-4"
-                post-action="/upload/post"
-                extensions="gif,jpg,jpeg,png,webp"
-                accept="image/png,image/gif,image/jpeg,image/webp"
-                :multiple="true"
-                :size="1024 * 1024 * 10"
-                v-model="files"
-                @input-filter="inputFilter"
-                @input-file="inputFile"
-                ref="upload"
-              >Select files</file-upload>
-            </div>
+
+          <div class="form-group">
+            <label for="">Upload Photos</label>
+            <input type="file" class="form-control" multiple @change="getFiles">
           </div>
+
         </div>
     </div>
   </transition-group>
@@ -43,13 +26,12 @@
 
 <script>
 
-import FileUpload from 'vue-upload-component'
-
 export default {
 
   data(){
     return {
       files: [],
+      form: new FormData
     }
   },
 
@@ -61,52 +43,30 @@ export default {
 
   methods: {
 
-    inputFilter(newFile, oldFile, prevent) {
-
-       if (newFile && !oldFile) {
-        // Before adding a file
-        // 添加文件前
-        // Filter system files or hide files
-        // 过滤系统文件 和隐藏文件
-        if (/(\/|^)(Thumbs\.db|desktop\.ini|\..+)$/.test(newFile.name)) {
-          return prevent()
-        }
-
+    getFiles(e) {
+      console.log('hola')
+      let selectedFiles = e.target.files;
+      if (!selectedFiles.length) {
+        return false;
       }
-      if (newFile && (!oldFile || newFile.file !== oldFile.file)) {
-        // Create a blob field
-        // 创建 blob 字段
-        newFile.blob = ''
-        let URL = window.URL || window.webkitURL
-        if (URL && URL.createObjectURL) {
-          newFile.blob = URL.createObjectURL(newFile.file)
-        }
-        // Thumbnails
-        // 缩略图
-        newFile.thumb = ''
-        if (newFile.blob && newFile.type.substr(0, 6) === 'image/') {
-          newFile.thumb = newFile.blob
-        }
-      }
+
+    for (let index = 0; index < selectedFiles.length; index++) {
+
+      this.files.push(selectedFiles[index]);
+
+    }
+
+    console.log(this.files)
 
     },
-    inputFile(newFile, oldFile) {
-      if (newFile && !oldFile) {
-        // add
-        console.log('add', newFile)
-      }
-      if (newFile && oldFile) {
-        // update
-        console.log('update', newFile)
-      }
-      if (!newFile && oldFile) {
-        // remove
-        console.log('remove', oldFile)
-      }
-    },
+
+
 
     next(){
+
+      this.$store.dispatch('loadGaragePhotos', this.files);
       EventBus.$emit('changeComponent', 'appSaleSumamry', '100%');
+
     },
 
     cancel(){
@@ -114,9 +74,6 @@ export default {
     }
   },
 
-  components: {
-    FileUpload,
-  },
 
 }
 </script>

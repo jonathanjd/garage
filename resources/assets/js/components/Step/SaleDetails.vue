@@ -67,6 +67,33 @@
           </div>
         </div>
     </div>
+    <div v-if="!showNewUser" class="card border-primary mt-4" key="box4">
+      <div class="card-body">
+        <h4>New User</h4>
+        <app-message v-if="showAlertMessage" :myTitle="miAlertMessageTitle" :myTypeAlert="miAlertMessageType"></app-message>
+        <div class="form-group">
+          <label for="">Name</label>
+          <input data-vv-name="name" :class="[errors.has('name') ? 'form-control is-invalid': 'form-control']" v-validate="{ required: true, max:255 }" type="text" v-model="newUserForm.name">
+          <div class="invalid-data" v-if="errors.has('name')">
+            {{errors.first('name')}}
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="">Email</label>
+          <input data-vv-name="email" :class="[errors.has('email') ? 'form-control is-invalid': 'form-control']" v-validate="{ required: true, email: true }" type="email" v-model="newUserForm.email">
+          <div class="invalid-data" v-if="errors.has('email')">
+            {{errors.first('email')}}
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="">Password</label>
+          <input data-vv-name="password" :class="[errors.has('password') ? 'form-control is-invalid': 'form-control']" v-validate="{ required: true, min:6 }" type="password" v-model="newUserForm.password">
+          <div class="invalid-data" v-if="errors.has('password')">
+            {{errors.first('password')}}
+          </div>
+        </div>
+      </div>
+    </div>
   </transition-group>
   <div class="mt-4">
     <button @click="cancel" class="btn btn-outline-dark">Cancel</button>
@@ -78,6 +105,7 @@
 <script>
 import Datepicker from 'vuejs-datepicker';
 import { hours } from '../../data/hours.js';
+import Message from '../alert/Message';
 
 export default {
   data() {
@@ -95,7 +123,13 @@ export default {
       myDataPicker1: false,
       myDataPicker2: false,
       inputStartHour: false,
-      inputEndHour: false
+      inputEndHour: false,
+      userActive: false,
+      newUserForm: {
+        name: '',
+        email: '',
+        password: ''
+      }
     };
   },
 
@@ -104,9 +138,26 @@ export default {
     this.startDate = this.$moment().format('DD MMM YYYY');
     this.endDate = this.$moment().format('DD MMM YYYY');
     this.baseHour = hours;
+    this.userLogging();
   },
 
   computed: {
+
+    showAlertMessage() {
+      return this.$store.getters.getAlertMessageShows;
+    },
+
+    miAlertMessageTitle() {
+      return this.$store.getters.getAlertMessageTitle;
+    },
+
+    miAlertMessageType() {
+      return this.$store.getters.getAlertMessageType;
+    },
+
+    showNewUser(){
+      return this.userActive;
+    },
 
     validateTitle() {
       return this.title.length >= 100;
@@ -148,10 +199,20 @@ export default {
   },
 
   components: {
-    Datepicker
+    Datepicker,
+    appMessage: Message
   },
 
   methods: {
+
+    userLogging() {
+
+      axios.get('/api/search/user/logging').then( res => {
+        this.userActive = res.data;
+        this.$store.dispatch('loadUserActive', this.userActive);
+      });
+
+    },
 
     validateDatePicker1(){
       this.myDataPicker1 = false;
@@ -186,18 +247,62 @@ export default {
     },
 
     next() {
-      const data = {
-        title: this.title,
-        description: this.description,
-        type: this.type,
-        startDate: this.$moment(this.startDate).format('YYYY-MM-DD'),
-        endDate: this.$moment(this.endDate).format('YYYY-MM-DD'),
-        startHour: this.$moment(this.startHour, 'HH:mm a').format('YYYY-MM-DD HH:mm:ss'),
-        endHour: this.$moment(this.endHour, 'HH:mm a').format('YYYY-MM-DD HH:mm:ss'),
-      };
 
-      this.$store.dispatch('loadGarageDataBasic', data);
-      EventBus.$emit('changeComponent', 'appSalePhotos', '70%');
+      if (this.userActive) {
+        const data = {
+          title: this.title,
+          description: this.description,
+          type: this.type,
+          startDate: this.$moment(this.startDate).format('YYYY-MM-DD'),
+          endDate: this.$moment(this.endDate).format('YYYY-MM-DD'),
+          startHour: this.$moment(this.startHour, 'HH:mm a').format('YYYY-MM-DD HH:mm:ss'),
+          endHour: this.$moment(this.endHour, 'HH:mm a').format('YYYY-MM-DD HH:mm:ss'),
+        };
+
+        this.$store.dispatch('loadGarageDataBasic', data);
+        EventBus.$emit('changeComponent', 'appSalePhotos', '70%');
+
+      } else {
+        //New User
+        if (this.$validator.validateAll()) {
+
+          axios.get(`/api/search/user/email/verificar/${this.newUserForm.email}`).then( res => {
+
+            if (res.data) {
+
+              this.$store.dispatch('loadAlertMessageTitle', 'This Email Has Already Been Taken');
+              this.$store.dispatch('loadAlertMessageType', 'alert-danger');
+              this.$store.dispatch('loadAlertMessageShow', true);
+
+            } else {
+
+              const data = {
+                title: this.title,
+                description: this.description,
+                type: this.type,
+                startDate: this.$moment(this.startDate).format('YYYY-MM-DD'),
+                endDate: this.$moment(this.endDate).format('YYYY-MM-DD'),
+                startHour: this.$moment(this.startHour, 'HH:mm a').format('YYYY-MM-DD HH:mm:ss'),
+                endHour: this.$moment(this.endHour, 'HH:mm a').format('YYYY-MM-DD HH:mm:ss'),
+              };
+
+              const NEW_DATA = {
+                name: this.newUserForm.name,
+                email: this.newUserForm.email,
+                password: this.newUserForm.password
+              }
+
+              this.$store.dispatch('loadNewUser', NEW_DATA);
+              this.$store.dispatch('loadGarageDataBasic', data);
+              EventBus.$emit('changeComponent', 'appSalePhotos', '70%');
+
+            }
+
+          });
+
+        }
+      }
+
     },
 
     cancel() {

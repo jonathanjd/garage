@@ -20,7 +20,7 @@
               <div class="col">
                 <select class="form-control" v-model="formData.state" id="exampleFormControlSelect1">
                   <option value="selected" disabled selected>State</option>
-                  <option v-for="(state, index) in myStates" :value="index">{{ index }}</option>
+                  <option v-for="state in listState" :value="state.id">{{ state.code }}</option>
                 </select>
               </div>
               <div class="col">
@@ -71,16 +71,22 @@ export default {
     EventBus.$on('destroyMessage', () => {
       this.showMessage = false;
     });
+
+    this.$store.dispatch('loadListState');
   },
 
   computed: {
     validateSearch() {
       return this.formData.address == '' || this.formData.city == '' || this.formData.postalCode == '' || this.formData.state == 'selected';
+    },
+
+    listState() {
+      return this.$store.getters.getlistState;
     }
   },
 
   mounted() {
-    //this.locationTest();
+    this.locationTest();
   },
 
   methods: {
@@ -100,7 +106,7 @@ export default {
     locationTest(){
       this.formData.address = '3046  Duke Lane';
       this.formData.city = 'Red Bank';
-      this.formData.state = 'NJ';
+      this.formData.state = 31;
       this.formData.postalCode = '07701';
     },
 

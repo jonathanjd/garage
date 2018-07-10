@@ -30,10 +30,32 @@ export const store = new Vuex.Store({
       type: null,
       show: false,
     },
-    listState: []
+    listState: [],
+    searchGarages: [],
+    newUser: {
+      name: '',
+      email: '',
+      type: 'client',
+      password: ''
+    },
+    userActive: false,
   },
 
   mutations: {
+
+    setUserActive(state, payload){
+      state.userActive = payload;
+    },
+
+    setNewUser(state, payload) {
+      state.newUser.name = payload.name;
+      state.newUser.email = payload.email;
+      state.newUser.password = payload.password;
+    },
+
+    setSearchGarages(state, payload) {
+      state.searchGarages = payload;
+    },
 
     setListState(state, payload) {
       state.listState = payload;
@@ -119,6 +141,18 @@ export const store = new Vuex.Store({
 
   getters: {
 
+    getUserActive(state) {
+      return state.userActive;
+    },
+
+    getNewUser(state) {
+      return state.newUser;
+    },
+
+    getSearchGarages(state){
+      return state.searchGarages;
+    },
+
     getlistState(state){
       return state.listState;
     },
@@ -150,6 +184,25 @@ export const store = new Vuex.Store({
   },
 
   actions: {
+
+    loadUserActive({commit}, payload) {
+      commit('setUserActive', payload);
+    },
+
+    loadNewUser({commit}, payload) {
+      commit('setNewUser', payload);
+    },
+
+    loadSearchPostal({commit}, payload) {
+      return new Promise((resolve, reject) => {
+        axios.get('/api/search/code/'.concat(payload)).then( res => {
+          commit('setSearchGarages', res.data);
+          resolve()
+        }).catch( () => {
+          reject();
+        })
+      });
+    },
 
     loadListState({commit}, payload) {
       return new Promise((resolve, reject) => {
@@ -211,7 +264,7 @@ export const store = new Vuex.Store({
     },
 
     loadGaragePhotos({commit}, payload){
-      commit('setGaragePhotos', payload.photos);
+      commit('setGaragePhotos', payload);
     },
 
     loadTypeGarages({commit}){

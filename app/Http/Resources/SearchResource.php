@@ -4,7 +4,7 @@ namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\Resource;
 
-class StateResource extends Resource
+class SearchResource extends Resource
 {
     /**
      * Transform the resource into an array.
@@ -15,11 +15,13 @@ class StateResource extends Resource
     public function toArray($request)
     {
         return [
-            'id' => $this->id,
-            'name' => $this->name,
-            'code' => $this->code,
             'lat' => $this->lat,
-            'lng' => $this->lng
+            'lng' => $this->lng,
+            'state' => $this->state,
+            'location' => [
+                'lat' => $this->lat,
+                'lng' => $this->lng,
+            ]
         ];
     }
 }

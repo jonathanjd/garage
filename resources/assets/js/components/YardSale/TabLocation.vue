@@ -14,9 +14,9 @@
           </div>
           <div class="col">
             <div class="input-group">
-              <input type="text" class="form-control" :placeholder="myPlacerHolderSearch" aria-label="Recipient's username" aria-describedby="basic-addon2">
+              <input v-model="formSearch.value" type="text" class="form-control" :placeholder="myPlacerHolderSearch" aria-label="Recipient's username" aria-describedby="basic-addon2">
               <div class="input-group-append">
-                <button class="btn btn-outline-primary" type="button"><font-awesome-icon :icon="myIcon" /></button>
+                <button @click="search()" class="btn btn-outline-primary" type="button"><font-awesome-icon :icon="myIcon" /></button>
               </div>
             </div>
           </div>
@@ -27,29 +27,42 @@
 </template>
 
 <script>
-import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
-import { faSearch } from '@fortawesome/free-solid-svg-icons'
-  export default {
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
+import { faSearch } from '@fortawesome/free-solid-svg-icons';
+export default {
+  data() {
+    return {
+      myIcon: faSearch,
+      formSearch: {
+        type: '0',
+        value: null
+      }
+    };
+  },
 
-    data () {
-      return {
-        myIcon: faSearch,
-        formSearch: {
-          type: '0',
-        }
+  computed: {
+    myPlacerHolderSearch() {
+      return this.formSearch.type == '0' ? 'Example: Savannah, GA' : 'Example: 31405';
+    }
+  },
+
+  methods: {
+
+    search() {
+      if (this.formSearch.type === '0') {
+        alert('City');
+      }
+      if (this.formSearch.type === '1') {
+       this.$store.dispatch('loadSearchPostal', this.formSearch.value);
       }
     },
 
-    computed: {
-      myPlacerHolderSearch() {
-        return this.formSearch.type == '0' ? 'Example: Savannah, GA' : 'Example: 31405';
-      }
-    },
+  },
 
-    components: {
-      FontAwesomeIcon
+  components: {
+    FontAwesomeIcon
   }
-  }
+};
 </script>
 
 <style>

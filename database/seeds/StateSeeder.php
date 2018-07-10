@@ -13,7 +13,6 @@ class StateSeeder extends Seeder
     public function run()
     {
         //
-        State::truncate();
         $state = new State();
         $state->code = 'AL';
         $state->name = 'Alabama';

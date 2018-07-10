@@ -12,11 +12,7 @@
       <div class="col-md-12">
         <h1>Post Your Garage Sale For Free</h1>
         <hr>
-        @if (auth()->check())
-          <sale-manage url="{{ URL::current() }}"></sale-manage>
-        @else
-          <a href="{{ route('register') }}" class="btn btn-primary btn-block">Register</a>
-        @endif
+        <sale-manage url="{{ URL::current() }}"></sale-manage>
       </div>
     </div>
   </div>

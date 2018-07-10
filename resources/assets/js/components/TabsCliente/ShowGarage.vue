@@ -22,7 +22,7 @@ export default {
 
   computed: {
     myLocationInfo() {
-      return `${this.myGarage.postal} ${this.myGarage.address}, ${this.myGarage.city}, ${this.myGarage.state}`
+      return `${this.myGarage.postal} ${this.myGarage.address}, ${this.myGarage.city}, ${this.myGarage.state.name}`
     },
 
     myDateInfo() {

@@ -44,7 +44,8 @@ export default {
   data(){
     return {
       myGarage:{},
-      myIconSave: faSave
+      myIconSave: faSave,
+      myForm: new FormData,
     }
   },
 
@@ -65,6 +66,9 @@ export default {
     },
     myLocationInfo(){
       return `${this.myGarage.postal} ${this.myGarage.address}, ${this.myGarage.city}, ${this.myGarage.state}`;
+    },
+    myUserActive(){
+      return this.$store.getters.getUserActive;
     }
   },
 
@@ -74,36 +78,85 @@ export default {
 
   methods: {
     saveGarage(){
-      const data = {
-        address: this.myGarage.address,
-        city: this.myGarage.city,
-        state: this.myGarage.state,
-        postal: this.myGarage.postal,
-        lat: this.myGarage.location.lat,
-        lng: this.myGarage.location.lng,
-        title: this.myGarage.title,
-        description: this.myGarage.description,
-        startdate: this.myGarage.startDate,
-        enddate: this.myGarage.endDate,
-        starthour: this.myGarage.startHour,
-        endhour: this.myGarage.endHour,
-        type_garage_id: this.myGarage.type
-      };
 
-      axios.post('/admin/api/garage', data).then(() =>{
+      let data = {};
 
-        if (this.urlCurrent != undefined) {
-          EventBus.$emit('changeGarageSuccess')
-        }else {
-          this.$store.dispatch('loadAlertMessageTitle', 'Garage Saved');
-          this.$store.dispatch('loadAlertMessageType', 'alert-success');
-          this.$store.dispatch('loadAlertMessageShow', true);
-          EventBus.$emit('showMyDashboard');
+      if (this.myUserActive) {
+
+          this.myForm.append('address', this.myGarage.address);
+          this.myForm.append('city', this.myGarage.city);
+          this.myForm.append('state', this.myGarage.state);
+          this.myForm.append('postal', this.myGarage.postal);
+          this.myForm.append('lat', this.myGarage.location.lat);
+          this.myForm.append('lng', this.myGarage.location.lng);
+          this.myForm.append('title', this.myGarage.title);
+          this.myForm.append('description', this.myGarage.description);
+          this.myForm.append('photos', this.myGarage.photos);
+          this.myForm.append('startdate', this.myGarage.startDate);
+          this.myForm.append('enddate', this.myGarage.endDate);
+          this.myForm.append('starthour', this.myGarage.startHour);
+          this.myForm.append('endhour', this.myGarage.endHour);
+          this.myForm.append('type_garage_id', this.myGarage.type);
+
+          for(let i=0; i < this.myGarage.photos.length; i++){
+            this.myForm.append('photos[]',this.myGarage.photos[i]);
+          }
+
+         let config = {
+            headers: { 'Content-Type': 'multipart/form-data' }
+          };
+
+          axios.post('/admin/api/garage', this.myForm, config).then(() =>{
+
+          if (this.urlCurrent != undefined) {
+            EventBus.$emit('changeGarageSuccess')
+          }else {
+            this.$store.dispatch('loadAlertMessageTitle', 'Garage Saved');
+            this.$store.dispatch('loadAlertMessageType', 'alert-success');
+            this.$store.dispatch('loadAlertMessageShow', true);
+            EventBus.$emit('showMyDashboard');
+          }
+
+        }).catch(() => {
+          console.log('Error');
+        });
+
+      } else {
+          data = {
+          name: this.$store.getters.getNewUser.name,
+          email: this.$store.getters.getNewUser.email,
+          password: this.$store.getters.getNewUser.password,
+          address: this.myGarage.address,
+          city: this.myGarage.city,
+          state: this.myGarage.state,
+          postal: this.myGarage.postal,
+          lat: this.myGarage.location.lat,
+          lng: this.myGarage.location.lng,
+          title: this.myGarage.title,
+          description: this.myGarage.description,
+          startdate: this.myGarage.startDate,
+          enddate: this.myGarage.endDate,
+          starthour: this.myGarage.startHour,
+          endhour: this.myGarage.endHour,
+          type_garage_id: this.myGarage.type
+        };
+
+        axios.post('/api/garage', data).then(() =>{
+
+          if (this.urlCurrent != undefined) {
+            EventBus.$emit('changeGarageSuccess')
+          }else {
+            this.$store.dispatch('loadAlertMessageTitle', 'Garage Saved');
+            this.$store.dispatch('loadAlertMessageType', 'alert-success');
+            this.$store.dispatch('loadAlertMessageShow', true);
+            EventBus.$emit('showMyDashboard');
+          }
+
+        }).catch(() => {
+          console.log('Error');
+        });
+
         }
-
-      }).catch(() => {
-        console.log('Error');
-      });
 
     }
   },

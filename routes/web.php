@@ -31,6 +31,11 @@ Route::get('contact', function () {
     return view('contacto');
 })->name('contact');
 
+Route::get('/api/search/user/logging', 'SearchController@searchUserLogging');
+Route::get('/api/search/user/email/verificar/{email}', 'SearchController@verificarEmail');
+
+Route::post('/api/garage', 'GarageOffController@store');
+
 Auth::routes();
 
 Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {

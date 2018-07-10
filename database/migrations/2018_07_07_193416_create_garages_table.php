@@ -18,7 +18,6 @@ class CreateGaragesTable extends Migration
 
             $table->string('address');
             $table->string('city');
-            $table->string('state');
             $table->string('postal');
 
             $table->string('title');
@@ -34,11 +33,12 @@ class CreateGaragesTable extends Migration
             $table->string('lng');
 
             $table->integer('type_garage_id')->unsigned();
-
             $table->foreign('type_garage_id')->references('id')->on('type_garages');
 
-            $table->integer('user_id')->unsigned();
+            $table->integer('state_id')->unsigned();
+            $table->foreign('state_id')->references('id')->on('states');
 
+            $table->integer('user_id')->unsigned();
             $table->foreign('user_id')->references('id')->on('users');
 
             $table->timestamps();

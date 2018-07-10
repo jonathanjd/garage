@@ -1,43 +1,43 @@
 <template>
   <div>
     <div v-if="garageSuccess">
-      <div class="car border-success">
-        <div class="card-body">
-          <div class="alert alert-success" role="alert">
-            <h4 class="alert-heading">Well done!</h4>
-            <p>Your Garage Has Been Successfully Created</p>
+      <transition name="fadeUp" appear>
+        <div class="car border-primary">
+          <div class="card-body">
+            <div class="alert alert-success" role="alert">
+              <h4 class="alert-heading">Well done!</h4>
+              <p>Your Garage Has Been Successfully Created</p>
+              <hr>
+              <p class="mb-0"><strong>GarageSale.com</strong></p>
+            </div>
+            <h5>Summary</h5>
             <hr>
-            <p class="mb-0"><strong>GarageSale.com</strong></p>
+            <h5>{{ myGarageData.title }}</h5>
+            <h6>Description:</h6>
+            <p>{{ myGarageData.description }}</p>
+            <div class="row">
+              <div class="col">
+                <p><strong>Start Date:</strong> {{ myFormatDateStart }}</p>
+              </div>
+              <div class="col">
+                <p><strong>End Date:</strong> {{ myFormatDateEnd }}</p>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col">
+                <p><strong>Start Hour:</strong> {{ myFormatHourStart }}</p>
+              </div>
+              <div class="col">
+                <p><strong>End Hour:</strong> {{ myFormatHourEnd }}</p>
+              </div>
+            </div>
+            <p>
+              <strong>Location:</strong> {{ myLocationInfo }}
+            </p>
+            <button @click="cerrar" class="btn btn-primary btn-block">Add Sale</button>
           </div>
-          <h5>Summary</h5>
-          <hr>
-          <h5>{{ myGarageData.title }}</h5>
-          <h6>Description:</h6>
-          <p>{{ myGarageData.description }}</p>
-          <div class="row">
-            <div class="col">
-              <p><strong>Start Date:</strong> {{ myFormatDateStart }}</p>
-            </div>
-            <div class="col">
-              <p><strong>End Date:</strong> {{ myFormatDateEnd }}</p>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col">
-              <p><strong>Start Hour:</strong> {{ myFormatHourStart }}</p>
-            </div>
-            <div class="col">
-              <p><strong>End Hour:</strong> {{ myFormatHourEnd }}</p>
-            </div>
-          </div>
-          <p>
-            <strong>Location:</strong> {{ myLocationInfo }}
-          </p>
-
-
-          <button @click="cerrar" class="btn btn-primary btn-block">Add Sale</button>
         </div>
-      </div>
+      </transition>
     </div>
     <div v-else>
       <div class="card">

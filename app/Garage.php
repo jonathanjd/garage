@@ -10,7 +10,6 @@ class Garage extends Model
     protected $fillable = [
         'address',
         'city',
-        'state',
         'postal',
         'lat',
         'lng',
@@ -20,7 +19,27 @@ class Garage extends Model
         'enddate',
         'starthour',
         'endhour',
+        'state_id',
         'type_garage_id',
         'user_id',
     ];
+
+    public function state()
+    {
+        # code...
+        return $this->belongsTo(State::class);
+    }
+
+    public function user()
+    {
+        # code...
+        return $this->belongsTo(User::class);
+    }
+
+    public function images()
+    {
+        # code...
+        return $this->hasMany(Image::class);
+    }
+
 }
