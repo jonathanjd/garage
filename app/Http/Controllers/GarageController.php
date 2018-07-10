@@ -55,8 +55,6 @@ class GarageController extends Controller
         //
         # code...
 
-
-
         $garage = new Garage();
 
         $garage->address = $request->address;

@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\User;
+use App\Image;
 use App\Garage;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Symfony\Component\HttpFoundation\Response;
 
 class GarageOffController extends Controller
 {
@@ -45,7 +47,18 @@ class GarageOffController extends Controller
             $garage->user_id = $user->id;
 
             $garage->save();
-            return redirect()->route('dashboard');
+
+            $uploadedFiles = $request->photos;
+            foreach ($uploadedFiles as $file) {
+                $filename = time() . '-' . $file->getClientOriginalName();
+                $file->storeAs('photos', $filename, 'upload');
+                $image = new Image();
+                $image->name = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
+                $image->garage()->associate($garage);
+                $image->save();
+            }
+
+            return response()->json('Created', Response::HTTP_CREATED);
         }
 
     }

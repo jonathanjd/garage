@@ -81599,7 +81599,7 @@ exports = module.exports = __webpack_require__(0)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -81737,26 +81737,34 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
           console.log('Error');
         });
       } else {
-        data = {
-          name: this.$store.getters.getNewUser.name,
-          email: this.$store.getters.getNewUser.email,
-          password: this.$store.getters.getNewUser.password,
-          address: this.myGarage.address,
-          city: this.myGarage.city,
-          state: this.myGarage.state,
-          postal: this.myGarage.postal,
-          lat: this.myGarage.location.lat,
-          lng: this.myGarage.location.lng,
-          title: this.myGarage.title,
-          description: this.myGarage.description,
-          startdate: this.myGarage.startDate,
-          enddate: this.myGarage.endDate,
-          starthour: this.myGarage.startHour,
-          endhour: this.myGarage.endHour,
-          type_garage_id: this.myGarage.type
+
+        this.myForm.append('name', this.$store.getters.getNewUser.name);
+        this.myForm.append('email', this.$store.getters.getNewUser.email);
+        this.myForm.append('password', this.$store.getters.getNewUser.password);
+        this.myForm.append('address', this.myGarage.address);
+        this.myForm.append('city', this.myGarage.city);
+        this.myForm.append('state', this.myGarage.state);
+        this.myForm.append('postal', this.myGarage.postal);
+        this.myForm.append('lat', this.myGarage.location.lat);
+        this.myForm.append('lng', this.myGarage.location.lng);
+        this.myForm.append('title', this.myGarage.title);
+        this.myForm.append('description', this.myGarage.description);
+        this.myForm.append('photos', this.myGarage.photos);
+        this.myForm.append('startdate', this.myGarage.startDate);
+        this.myForm.append('enddate', this.myGarage.endDate);
+        this.myForm.append('starthour', this.myGarage.startHour);
+        this.myForm.append('endhour', this.myGarage.endHour);
+        this.myForm.append('type_garage_id', this.myGarage.type);
+
+        for (var _i = 0; _i < this.myGarage.photos.length; _i++) {
+          this.myForm.append('photos[]', this.myGarage.photos[_i]);
+        }
+
+        var _config = {
+          headers: { 'Content-Type': 'multipart/form-data' }
         };
 
-        axios.post('/api/garage', data).then(function () {
+        axios.post('/api/garage', this.myForm, _config).then(function () {
 
           if (_this.urlCurrent != undefined) {
             EventBus.$emit('changeGarageSuccess');
