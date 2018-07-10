@@ -306,7 +306,7 @@ export default {
     },
 
     cancel() {
-      EventBus.$emit('changeComponent', 'appSaleLocation', '20%');
+      EventBus.$emit('changeComponent', 'appSaleLocation', '0%');
     }
   }
 };

@@ -77995,7 +77995,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     appSaleLocation: __WEBPACK_IMPORTED_MODULE_0__Step_SaleLocation___default.a,
     appSaleDetails: __WEBPACK_IMPORTED_MODULE_1__Step_SaleDetails___default.a,
     appSalePhotos: __WEBPACK_IMPORTED_MODULE_2__Step_SalePhotos___default.a,
-    appSaleSumamry: __WEBPACK_IMPORTED_MODULE_3__Step_SaleSummary___default.a
+    appSaleSummary: __WEBPACK_IMPORTED_MODULE_3__Step_SaleSummary___default.a
   }
 
 });
@@ -79234,7 +79234,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       }
     },
     cancel: function cancel() {
-      EventBus.$emit('changeComponent', 'appSaleLocation', '20%');
+      EventBus.$emit('changeComponent', 'appSaleLocation', '0%');
     }
   }
 });
@@ -81366,7 +81366,7 @@ exports = module.exports = __webpack_require__(0)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -81408,40 +81408,40 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      files: [],
-      form: new FormData()
+      files: []
     };
+  },
+  created: function created() {
+    this.files = [];
   },
 
 
   computed: {
-    multiImageUrl: function multiImageUrl() {
-      return this.files.length > 0;
+    validareIMG: function validareIMG() {
+      return this.files.length > 0 && this.files.length < 6;
     }
   },
 
   methods: {
     getFiles: function getFiles(e) {
-      console.log('hola');
+      console.log(e);
       var selectedFiles = e.target.files;
       if (!selectedFiles.length) {
         return false;
       }
 
       for (var index = 0; index < selectedFiles.length; index++) {
-
         this.files.push(selectedFiles[index]);
       }
-
-      console.log(this.files);
     },
     next: function next() {
 
       this.$store.dispatch('loadGaragePhotos', this.files);
-      EventBus.$emit('changeComponent', 'appSaleSumamry', '100%');
+      EventBus.$emit('changeComponent', 'appSaleSummary', '100%');
     },
     cancel: function cancel() {
-      EventBus.$emit('changeComponent', 'appSalePhotos', '70%');
+      this.files = [];
+      EventBus.$emit('changeComponent', 'appSaleDetails', '20%');
     }
   }
 
@@ -81495,7 +81495,11 @@ var render = function() {
         _vm._v(" "),
         _c(
           "button",
-          { staticClass: "btn btn-primary", on: { click: _vm.next } },
+          {
+            staticClass: "btn btn-primary",
+            attrs: { disabled: !_vm.validareIMG },
+            on: { click: _vm.next }
+          },
           [_vm._v("Next")]
         )
       ])
@@ -81599,7 +81603,7 @@ exports = module.exports = __webpack_require__(0)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -81613,6 +81617,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__fortawesome_vue_fontawesome__ = __webpack_require__(18);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__fortawesome_vue_fontawesome___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__fortawesome_vue_fontawesome__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__fortawesome_free_solid_svg_icons__ = __webpack_require__(19);
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -81693,6 +81704,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
   methods: {
+    cancel: function cancel() {
+      EventBus.$emit('changeComponent', 'appSalePhotos', '70%');
+    },
     saveGarage: function saveGarage() {
       var _this = this;
 
@@ -81854,19 +81868,34 @@ var render = function() {
       ]),
       _vm._v(" "),
       _c("div", { staticClass: "mt-4" }, [
-        _c(
-          "button",
-          {
-            staticClass: "btn btn-success btn-block",
-            attrs: { type: "button" },
-            on: { click: _vm.saveGarage }
-          },
-          [
-            _c("font-awesome-icon", { attrs: { icon: _vm.myIconSave } }),
-            _vm._v(" Save Garage")
-          ],
-          1
-        )
+        _c("div", { staticClass: "row" }, [
+          _c("div", { staticClass: "col" }, [
+            _c(
+              "button",
+              {
+                staticClass: "btn btn-outline-dark btn-block",
+                on: { click: _vm.cancel }
+              },
+              [_vm._v("Cancel")]
+            )
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "col" }, [
+            _c(
+              "button",
+              {
+                staticClass: "btn btn-success btn-block",
+                attrs: { type: "button" },
+                on: { click: _vm.saveGarage }
+              },
+              [
+                _c("font-awesome-icon", { attrs: { icon: _vm.myIconSave } }),
+                _vm._v(" Save Garage")
+              ],
+              1
+            )
+          ])
+        ])
       ])
     ],
     1

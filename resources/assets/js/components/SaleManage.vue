@@ -64,7 +64,7 @@
 import SaleLocation from './Step/SaleLocation';
 import SaleDetails from './Step/SaleDetails';
 import SalePhotos from './Step/SalePhotos';
-import SaleSumamry from './Step/SaleSummary';
+import SaleSummary from './Step/SaleSummary';
 
 export default {
 
@@ -129,7 +129,7 @@ export default {
     appSaleLocation: SaleLocation,
     appSaleDetails: SaleDetails,
     appSalePhotos: SalePhotos,
-    appSaleSumamry: SaleSumamry,
+    appSaleSummary: SaleSummary,
   }
 
 }

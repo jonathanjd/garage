@@ -31,7 +31,14 @@
     </div>
   </transition-group>
   <div class="mt-4">
-    <button @click="saveGarage" type="button" class="btn btn-success btn-block"><font-awesome-icon :icon="myIconSave" /> Save Garage</button>
+    <div class="row">
+      <div class="col">
+        <button @click="cancel" class="btn btn-outline-dark btn-block">Cancel</button>
+      </div>
+      <div class="col">
+        <button @click="saveGarage" type="button" class="btn btn-success btn-block"><font-awesome-icon :icon="myIconSave" /> Save Garage</button>
+      </div>
+    </div>
   </div>
 </div>
 </template>
@@ -77,6 +84,11 @@ export default {
   },
 
   methods: {
+
+    cancel(){
+      EventBus.$emit('changeComponent', 'appSalePhotos', '70%');
+    },
+
     saveGarage(){
 
       let data = {};

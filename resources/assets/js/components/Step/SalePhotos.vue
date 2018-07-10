@@ -19,7 +19,7 @@
   </transition-group>
   <div class="mt-4">
     <button @click="cancel" class="btn btn-outline-dark">Cancel</button>
-    <button @click="next" class="btn btn-primary">Next</button>
+    <button @click="next" class="btn btn-primary" :disabled="!validareIMG">Next</button>
   </div>
 </div>
 </template>
@@ -30,47 +30,46 @@ export default {
 
   data(){
     return {
-      files: [],
-      form: new FormData
+      files: []
     }
   },
 
+  created() {
+    this.files = [];
+  },
+
   computed: {
-    multiImageUrl(){
-      return this.files.length > 0;
+
+    validareIMG() {
+      return this.files.length > 0 && this.files.length < 6;
     }
   },
 
   methods: {
 
     getFiles(e) {
-      console.log('hola')
+      console.log(e);
       let selectedFiles = e.target.files;
       if (!selectedFiles.length) {
         return false;
       }
 
-    for (let index = 0; index < selectedFiles.length; index++) {
-
-      this.files.push(selectedFiles[index]);
-
-    }
-
-    console.log(this.files)
+      for (let index = 0; index < selectedFiles.length; index++) {
+        this.files.push(selectedFiles[index]);
+      }
 
     },
-
-
 
     next(){
 
       this.$store.dispatch('loadGaragePhotos', this.files);
-      EventBus.$emit('changeComponent', 'appSaleSumamry', '100%');
+      EventBus.$emit('changeComponent', 'appSaleSummary', '100%');
 
     },
 
     cancel(){
-      EventBus.$emit('changeComponent', 'appSalePhotos', '70%');
+      this.files = [];
+      EventBus.$emit('changeComponent', 'appSaleDetails', '20%');
     }
   },
 
