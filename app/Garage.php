@@ -42,4 +42,10 @@ class Garage extends Model
         return $this->hasMany(Image::class);
     }
 
+    public function tags()
+    {
+        # code...
+        return $this->belongsToMany(Tag::class);
+    }
+
 }
