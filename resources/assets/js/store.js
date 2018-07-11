@@ -16,6 +16,7 @@ export const store = new Vuex.Store({
       postal: null,
       title: null,
       description: null,
+      tags: [],
       type: null,
       startDate: null,
       endDate: null,
@@ -107,6 +108,10 @@ export const store = new Vuex.Store({
 
     setGarageDescription(state, payload){
       state.garageData.description = payload
+    },
+
+    setGarageTags(state, payload){
+      state.garageData.tags = payload
     },
 
     setGarageType(state, payload){
@@ -256,6 +261,7 @@ export const store = new Vuex.Store({
     loadGarageDataBasic({commit}, payload){
       commit('setGarageTitle', payload.title);
       commit('setGarageDescription', payload.description);
+      commit('setGarageTags', payload.tags);
       commit('setGarageType', payload.type);
       commit('setGarageStartDate', payload.startDate);
       commit('setGarageEndDate', payload.endDate);

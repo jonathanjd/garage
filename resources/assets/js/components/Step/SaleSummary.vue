@@ -103,6 +103,7 @@ export default {
           this.myForm.append('lng', this.myGarage.location.lng);
           this.myForm.append('title', this.myGarage.title);
           this.myForm.append('description', this.myGarage.description);
+          this.myForm.append('tags', this.myGarage.tags);
           this.myForm.append('photos', this.myGarage.photos);
           this.myForm.append('startdate', this.myGarage.startDate);
           this.myForm.append('enddate', this.myGarage.endDate);
@@ -146,6 +147,7 @@ export default {
         this.myForm.append('lng', this.myGarage.location.lng);
         this.myForm.append('title', this.myGarage.title);
         this.myForm.append('description', this.myGarage.description);
+        this.myForm.append('tags', this.myGarage.tags);
         this.myForm.append('photos', this.myGarage.photos);
         this.myForm.append('startdate', this.myGarage.startDate);
         this.myForm.append('enddate', this.myGarage.endDate);

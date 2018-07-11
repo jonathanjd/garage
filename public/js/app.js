@@ -26798,7 +26798,7 @@ exports.push([module.i, "/* required styles */\r\n\r\n.leaflet-pane,\r\n.leaflet
 /* unused harmony export faAtlas */
 /* unused harmony export faAudioDescription */
 /* unused harmony export faAward */
-/* unused harmony export faBackspace */
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return faBackspace; });
 /* unused harmony export faBackward */
 /* unused harmony export faBalanceScale */
 /* unused harmony export faBan */
@@ -27295,10 +27295,10 @@ exports.push([module.i, "/* required styles */\r\n\r\n.leaflet-pane,\r\n.leaflet
 /* unused harmony export faRupeeSign */
 /* unused harmony export faSadCry */
 /* unused harmony export faSadTear */
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return faSave; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return faSave; });
 /* unused harmony export faSchool */
 /* unused harmony export faScrewdriver */
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return faSearch; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "c", function() { return faSearch; });
 /* unused harmony export faSearchMinus */
 /* unused harmony export faSearchPlus */
 /* unused harmony export faSeedling */
@@ -72716,6 +72716,7 @@ var store = new __WEBPACK_IMPORTED_MODULE_1_vuex__["a" /* default */].Store({
       postal: null,
       title: null,
       description: null,
+      tags: [],
       type: null,
       startDate: null,
       endDate: null,
@@ -72791,6 +72792,9 @@ var store = new __WEBPACK_IMPORTED_MODULE_1_vuex__["a" /* default */].Store({
     },
     setGarageDescription: function setGarageDescription(state, payload) {
       state.garageData.description = payload;
+    },
+    setGarageTags: function setGarageTags(state, payload) {
+      state.garageData.tags = payload;
     },
     setGarageType: function setGarageType(state, payload) {
       state.garageData.type = payload;
@@ -72933,6 +72937,7 @@ var store = new __WEBPACK_IMPORTED_MODULE_1_vuex__["a" /* default */].Store({
 
       commit('setGarageTitle', payload.title);
       commit('setGarageDescription', payload.description);
+      commit('setGarageTags', payload.tags);
       commit('setGarageType', payload.type);
       commit('setGarageStartDate', payload.startDate);
       commit('setGarageEndDate', payload.endDate);
@@ -74555,7 +74560,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      myIcon: __WEBPACK_IMPORTED_MODULE_1__fortawesome_free_solid_svg_icons__["b" /* faSearch */],
+      myIcon: __WEBPACK_IMPORTED_MODULE_1__fortawesome_free_solid_svg_icons__["c" /* faSearch */],
       formSearch: {
         type: '0',
         value: null
@@ -78951,6 +78956,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__data_hours_js__ = __webpack_require__(114);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__alert_Message__ = __webpack_require__(6);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__alert_Message___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__alert_Message__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__voerro_vue_tagsinput__ = __webpack_require__(82);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__fortawesome_vue_fontawesome__ = __webpack_require__(18);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__fortawesome_vue_fontawesome___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4__fortawesome_vue_fontawesome__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__fortawesome_free_solid_svg_icons__ = __webpack_require__(19);
 //
 //
 //
@@ -79055,6 +79064,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+
+
+
 
 
 
@@ -79066,6 +79083,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       types: [],
       title: '',
       description: '',
+      selectedTags: [],
       type: '1',
       startDate: '',
       endDate: '',
@@ -79082,7 +79100,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         name: '',
         email: '',
         password: ''
-      }
+      },
+      myIcon: __WEBPACK_IMPORTED_MODULE_5__fortawesome_free_solid_svg_icons__["a" /* faBackspace */]
     };
   },
   created: function created() {
@@ -79126,7 +79145,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       return this.myDataPicker2;
     },
     validateNextBTN: function validateNextBTN() {
-      return this.title == '' || this.description == '' || this.myDataPicker1 == true || this.myDataPicker2 == true || this.inputStartHour == true || this.inputEndHour == true || this.validateTitle == true || this.validateDescription == true;
+      return this.title == '' || this.description == '' || this.myDataPicker1 == true || this.myDataPicker2 == true || this.inputStartHour == true || this.inputEndHour == true || this.validateTitle == true || this.validateDescription == true || this.selectedTags.length <= 0;
     },
     myTypeGarages: function myTypeGarages() {
       return this.$store.getters.getTypeGarages;
@@ -79140,7 +79159,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
   components: {
     Datepicker: __WEBPACK_IMPORTED_MODULE_0_vuejs_datepicker__["a" /* default */],
-    appMessage: __WEBPACK_IMPORTED_MODULE_2__alert_Message___default.a
+    appMessage: __WEBPACK_IMPORTED_MODULE_2__alert_Message___default.a,
+    appTagsInput: __WEBPACK_IMPORTED_MODULE_3__voerro_vue_tagsinput__["a" /* default */],
+    FontAwesomeIcon: __WEBPACK_IMPORTED_MODULE_4__fortawesome_vue_fontawesome__["FontAwesomeIcon"]
   },
 
   methods: {
@@ -79187,6 +79208,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         var data = {
           title: this.title,
           description: this.description,
+          tags: this.selectedTags,
           type: this.type,
           startDate: this.$moment(this.startDate).format('YYYY-MM-DD'),
           endDate: this.$moment(this.endDate).format('YYYY-MM-DD'),
@@ -79212,6 +79234,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
               var _data = {
                 title: _this2.title,
                 description: _this2.description,
+                tags: _this2.selectedTags,
                 type: _this2.type,
                 startDate: _this2.$moment(_this2.startDate).format('YYYY-MM-DD'),
                 endDate: _this2.$moment(_this2.endDate).format('YYYY-MM-DD'),
@@ -80876,7 +80899,47 @@ var render = function() {
                     _vm._v("Maximum 2000 Characters Are Allowed")
                   ])
                 : _vm._e()
-            ])
+            ]),
+            _vm._v(" "),
+            _c(
+              "div",
+              { staticClass: "form-group" },
+              [
+                _c("label", { attrs: { for: "" } }, [_vm._v("Tags")]),
+                _vm._v(" "),
+                _c("app-tags-input", {
+                  attrs: {
+                    "element-id": "tags",
+                    "input-class": "form-control",
+                    placeholder: "Example: Books + Enter",
+                    limit: 4,
+                    "delete-on-backspace": true
+                  },
+                  model: {
+                    value: _vm.selectedTags,
+                    callback: function($$v) {
+                      _vm.selectedTags = $$v
+                    },
+                    expression: "selectedTags"
+                  }
+                }),
+                _vm._v(" "),
+                _c(
+                  "small",
+                  {
+                    staticClass: "form-text text-muted",
+                    attrs: { id: "emailHelp" }
+                  },
+                  [
+                    _vm._v("Whether deleting tags by pressing Backspace("),
+                    _c("font-awesome-icon", { attrs: { icon: _vm.myIcon } }),
+                    _vm._v(") is allowed.")
+                  ],
+                  1
+                )
+              ],
+              1
+            )
           ])
         ]),
         _vm._v(" "),
@@ -81603,7 +81666,7 @@ exports = module.exports = __webpack_require__(0)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -81669,7 +81732,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
   data: function data() {
     return {
       myGarage: {},
-      myIconSave: __WEBPACK_IMPORTED_MODULE_1__fortawesome_free_solid_svg_icons__["a" /* faSave */],
+      myIconSave: __WEBPACK_IMPORTED_MODULE_1__fortawesome_free_solid_svg_icons__["b" /* faSave */],
       myForm: new FormData()
     };
   },
@@ -81722,6 +81785,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         this.myForm.append('lng', this.myGarage.location.lng);
         this.myForm.append('title', this.myGarage.title);
         this.myForm.append('description', this.myGarage.description);
+        this.myForm.append('tags', this.myGarage.tags);
         this.myForm.append('photos', this.myGarage.photos);
         this.myForm.append('startdate', this.myGarage.startDate);
         this.myForm.append('enddate', this.myGarage.endDate);
@@ -81763,6 +81827,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         this.myForm.append('lng', this.myGarage.location.lng);
         this.myForm.append('title', this.myGarage.title);
         this.myForm.append('description', this.myGarage.description);
+        this.myForm.append('tags', this.myGarage.tags);
         this.myForm.append('photos', this.myGarage.photos);
         this.myForm.append('startdate', this.myGarage.startDate);
         this.myForm.append('enddate', this.myGarage.endDate);

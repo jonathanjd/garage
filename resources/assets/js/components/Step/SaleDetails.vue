@@ -24,6 +24,11 @@
               <textarea v-model="description" :class="[validateDescription ? 'form-control is-invalid':'form-control']"></textarea>
               <div v-if="validateDescription" class="invalid-data">Maximum 2000 Characters Are Allowed</div>
             </div>
+            <div class="form-group">
+              <label for="">Tags</label>
+              <app-tags-input element-id="tags" v-model="selectedTags" input-class="form-control" placeholder="Example: Books + Enter" :limit="4" :delete-on-backspace="true"></app-tags-input>
+              <small id="emailHelp" class="form-text text-muted">Whether deleting tags by pressing Backspace(<font-awesome-icon :icon="myIcon"></font-awesome-icon>) is allowed.</small>
+            </div>
         </div>
     </div>
     <div class="card border-primary mt-4" key="box3">
@@ -106,6 +111,9 @@
 import Datepicker from 'vuejs-datepicker';
 import { hours } from '../../data/hours.js';
 import Message from '../alert/Message';
+import TagsInput from '@voerro/vue-tagsinput';
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
+import { faBackspace } from '@fortawesome/free-solid-svg-icons';
 
 export default {
   data() {
@@ -113,6 +121,7 @@ export default {
       types: [],
       title: '',
       description: '',
+      selectedTags: [],
       type: '1',
       startDate: '',
       endDate: '',
@@ -129,7 +138,8 @@ export default {
         name: '',
         email: '',
         password: ''
-      }
+      },
+      myIcon: faBackspace,
     };
   },
 
@@ -184,7 +194,7 @@ export default {
     },
 
     validateNextBTN(){
-      return this.title == ''|| this.description == '' || this.myDataPicker1 == true || this.myDataPicker2 == true || this.inputStartHour == true || this.inputEndHour == true || this.validateTitle == true || this.validateDescription == true;
+      return this.title == ''|| this.description == '' || this.myDataPicker1 == true || this.myDataPicker2 == true || this.inputStartHour == true || this.inputEndHour == true || this.validateTitle == true || this.validateDescription == true || this.selectedTags.length <= 0;
     },
 
     myTypeGarages(){
@@ -200,7 +210,9 @@ export default {
 
   components: {
     Datepicker,
-    appMessage: Message
+    appMessage: Message,
+    appTagsInput: TagsInput,
+    FontAwesomeIcon
   },
 
   methods: {
@@ -252,6 +264,7 @@ export default {
         const data = {
           title: this.title,
           description: this.description,
+          tags: this.selectedTags,
           type: this.type,
           startDate: this.$moment(this.startDate).format('YYYY-MM-DD'),
           endDate: this.$moment(this.endDate).format('YYYY-MM-DD'),
@@ -279,6 +292,7 @@ export default {
               const data = {
                 title: this.title,
                 description: this.description,
+                tags: this.selectedTags,
                 type: this.type,
                 startDate: this.$moment(this.startDate).format('YYYY-MM-DD'),
                 endDate: this.$moment(this.endDate).format('YYYY-MM-DD'),

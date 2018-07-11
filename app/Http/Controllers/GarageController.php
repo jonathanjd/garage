@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Tag;
+use App\User;
+use App\Image;
 use App\Garage;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Symfony\Component\HttpFoundation\Response;
-use App\User;
-use App\Image;
 
 class GarageController extends Controller
 {
@@ -54,6 +55,7 @@ class GarageController extends Controller
     {
         //
         # code...
+        $myArrayTags = explode(',', $request->tags);
 
         $garage = new Garage();
 
@@ -86,6 +88,19 @@ class GarageController extends Controller
             $image->garage()->associate($garage);
             $image->save();
         }
+
+        $myArrayTags = explode(',', $request->tags);
+
+        foreach ($myArrayTags as $myTag) {
+            # code...
+            $tag = new Tag();
+            $tag->name = $myTag;
+            $tag->save();
+
+            $garage->tags()->sync($tag, false);
+        }
+
+
 
         return response()->json('Created', Response::HTTP_CREATED);
 
