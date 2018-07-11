@@ -26,8 +26,6 @@
       <p>
         <strong>Location:</strong> {{ myLocationInfo }}
       </p>
-      <h3>My Photos</h3>
-      <hr>
     </div>
   </transition-group>
   <div class="mt-4">

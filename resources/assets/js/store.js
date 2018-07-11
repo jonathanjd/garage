@@ -262,6 +262,8 @@ export const store = new Vuex.Store({
       commit('setGarageTitle', payload.title);
       commit('setGarageDescription', payload.description);
       commit('setGarageTags', payload.tags);
+      commit('setGaragePhotos', payload.photos);
+      commit('setGarageTags', payload.tags);
       commit('setGarageType', payload.type);
       commit('setGarageStartDate', payload.startDate);
       commit('setGarageEndDate', payload.endDate);

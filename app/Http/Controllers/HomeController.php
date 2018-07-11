@@ -2,27 +2,21 @@
 
 namespace App\Http\Controllers;
 
+use App\Garage;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
 
     /**
-     * Show the application dashboard.
+     * Page Home.
      *
      * @return \Illuminate\Http\Response
      */
     public function index()
     {
-        return view('home');
+        $garages = Garage::orderBy('id', 'desc')->get();
+        return view('home')->with('garages', $garages);
     }
 }

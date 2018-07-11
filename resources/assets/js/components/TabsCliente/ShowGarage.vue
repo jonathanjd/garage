@@ -57,6 +57,8 @@ export default {
       const DATABASIC = {
         title: this.myGarage.title,
         description: this.myGarage.description,
+        tags: this.myGarage.tags,
+        photos: this.myGarage.images,
         startDate: this.myGarage.startdate,
         endDate: this.myGarage.enddate,
         startHour: this.myGarage.starthour,

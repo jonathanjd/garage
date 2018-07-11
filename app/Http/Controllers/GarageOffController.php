@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Tag;
 use App\User;
 use App\Image;
 use App\Garage;
@@ -53,7 +54,7 @@ class GarageOffController extends Controller
                 $filename = time() . '-' . $file->getClientOriginalName();
                 $file->storeAs('photos', $filename, 'upload');
                 $image = new Image();
-                $image->name = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
+                $image->name = $filename;
                 $image->garage()->associate($garage);
                 $image->save();
             }

@@ -72938,6 +72938,8 @@ var store = new __WEBPACK_IMPORTED_MODULE_1_vuex__["a" /* default */].Store({
       commit('setGarageTitle', payload.title);
       commit('setGarageDescription', payload.description);
       commit('setGarageTags', payload.tags);
+      commit('setGaragePhotos', payload.photos);
+      commit('setGarageTags', payload.tags);
       commit('setGarageType', payload.type);
       commit('setGarageStartDate', payload.startDate);
       commit('setGarageEndDate', payload.endDate);
@@ -81668,7 +81670,7 @@ exports = module.exports = __webpack_require__(0)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -81682,8 +81684,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__fortawesome_vue_fontawesome__ = __webpack_require__(18);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__fortawesome_vue_fontawesome___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__fortawesome_vue_fontawesome__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__fortawesome_free_solid_svg_icons__ = __webpack_require__(19);
-//
-//
 //
 //
 //
@@ -81927,11 +81927,7 @@ var render = function() {
           _c("p", [
             _c("strong", [_vm._v("Location:")]),
             _vm._v(" " + _vm._s(_vm.myLocationInfo) + "\r\n      ")
-          ]),
-          _vm._v(" "),
-          _c("h3", [_vm._v("My Photos")]),
-          _vm._v(" "),
-          _c("hr")
+          ])
         ])
       ]),
       _vm._v(" "),
@@ -82779,7 +82775,7 @@ exports = module.exports = __webpack_require__(0)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -82846,6 +82842,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       var DATABASIC = {
         title: this.myGarage.title,
         description: this.myGarage.description,
+        tags: this.myGarage.tags,
+        photos: this.myGarage.images,
         startDate: this.myGarage.startdate,
         endDate: this.myGarage.enddate,
         startHour: this.myGarage.starthour,
@@ -83151,6 +83149,22 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -83248,77 +83262,128 @@ var render = function() {
               )
             ]),
             _vm._v(" "),
-            _c("h5", { staticClass: "card-title text-primary" }, [
-              _vm._v(_vm._s(_vm.myGarageData.title))
-            ]),
-            _vm._v(" "),
-            _c("p", { staticClass: "card-text" }, [
-              _vm._v(_vm._s(_vm.myGarageData.description))
-            ]),
-            _vm._v(" "),
-            _c("p", [
-              _c("strong", [_vm._v("Location:")]),
-              _vm._v(
-                " " +
-                  _vm._s(_vm.myGarageData.postal) +
-                  " " +
-                  _vm._s(_vm.myGarageData.address) +
-                  ", " +
-                  _vm._s(_vm.myGarageData.city) +
-                  ", " +
-                  _vm._s(_vm.formatState)
-              )
-            ]),
-            _vm._v(" "),
-            _c("p", [
-              _c("strong", [_vm._v("Start Date:")]),
-              _vm._v(
-                " " +
-                  _vm._s(
-                    this.$moment(
-                      _vm.myGarageData.startDate,
-                      "YYYY-MM-DD"
-                    ).format("DD MMM YYYY")
-                  )
-              )
-            ]),
-            _vm._v(" "),
-            _c("p", [
-              _c("strong", [_vm._v("End Date:")]),
-              _vm._v(
-                " " +
-                  _vm._s(
-                    this.$moment(_vm.myGarageData.endDate, "YYYY-MM-DD").format(
-                      "DD MMM YYYY"
+            _c("div", { staticClass: "row" }, [
+              _c("div", { staticClass: "col-md-12" }, [
+                _c("h5", { staticClass: "card-title text-primary" }, [
+                  _vm._v(_vm._s(_vm.myGarageData.title))
+                ]),
+                _vm._v(" "),
+                _c("p", { staticClass: "card-text" }, [
+                  _vm._v(_vm._s(_vm.myGarageData.description))
+                ]),
+                _vm._v(" "),
+                _c(
+                  "p",
+                  _vm._l(_vm.myGarageData.tags, function(tag) {
+                    return _c(
+                      "span",
+                      {
+                        key: tag.id,
+                        staticClass: "badge badge-info text-uppercase mx-1"
+                      },
+                      [
+                        _vm._v(
+                          "\n                " +
+                            _vm._s(tag.name) +
+                            "\n              "
+                        )
+                      ]
                     )
+                  })
+                ),
+                _vm._v(" "),
+                _c("p", [
+                  _c("strong", [_vm._v("Location:")]),
+                  _vm._v(
+                    " " +
+                      _vm._s(_vm.myGarageData.postal) +
+                      " " +
+                      _vm._s(_vm.myGarageData.address) +
+                      ", " +
+                      _vm._s(_vm.myGarageData.city) +
+                      ", " +
+                      _vm._s(_vm.formatState)
                   )
-              )
-            ]),
-            _vm._v(" "),
-            _c("p", [
-              _c("strong", [_vm._v("Hour:")]),
-              _vm._v(
-                " " +
-                  _vm._s(
-                    this.$moment(_vm.myGarageData.startHour, "HH:mm:ss").format(
-                      "HH:mm a"
-                    )
-                  ) +
-                  " - " +
-                  _vm._s(
-                    this.$moment(_vm.myGarageData.endHour, "HH:mm:ss").format(
-                      "HH:mm a"
-                    )
+                ]),
+                _vm._v(" "),
+                _c("p", [
+                  _c("strong", [_vm._v("Start Date:")]),
+                  _vm._v(
+                    " " +
+                      _vm._s(
+                        this.$moment(
+                          _vm.myGarageData.startDate,
+                          "YYYY-MM-DD"
+                        ).format("DD MMM YYYY")
+                      )
                   )
-              )
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "text-right" }, [
-              _c(
-                "button",
-                { staticClass: "btn btn-primary", on: { click: _vm.back } },
-                [_vm._v("Back")]
-              )
+                ]),
+                _vm._v(" "),
+                _c("p", [
+                  _c("strong", [_vm._v("End Date:")]),
+                  _vm._v(
+                    " " +
+                      _vm._s(
+                        this.$moment(
+                          _vm.myGarageData.endDate,
+                          "YYYY-MM-DD"
+                        ).format("DD MMM YYYY")
+                      )
+                  )
+                ]),
+                _vm._v(" "),
+                _c("p", [
+                  _c("strong", [_vm._v("Hour:")]),
+                  _vm._v(
+                    " " +
+                      _vm._s(
+                        this.$moment(
+                          _vm.myGarageData.startHour,
+                          "HH:mm:ss"
+                        ).format("HH:mm a")
+                      ) +
+                      " - " +
+                      _vm._s(
+                        this.$moment(
+                          _vm.myGarageData.endHour,
+                          "HH:mm:ss"
+                        ).format("HH:mm a")
+                      )
+                  )
+                ]),
+                _vm._v(" "),
+                _c("h6", { staticClass: "text-primary text-center" }, [
+                  _vm._v("Photos")
+                ]),
+                _vm._v(" "),
+                _c("hr"),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  { staticClass: "row" },
+                  _vm._l(_vm.myGarageData.photos, function(photo) {
+                    return _c("div", { staticClass: "col-md-4" }, [
+                      _c("img", {
+                        staticClass: "img-thumbnail",
+                        attrs: {
+                          src: "../img/photos/" + photo.name,
+                          alt: "",
+                          height: "200",
+                          width: "200"
+                        }
+                      })
+                    ])
+                  })
+                ),
+                _vm._v(" "),
+                _c("div", { staticClass: "text-right" }, [
+                  _c(
+                    "button",
+                    { staticClass: "btn btn-primary", on: { click: _vm.back } },
+                    [_vm._v("Back")]
+                  )
+                ])
+              ])
             ])
           ])
         ])

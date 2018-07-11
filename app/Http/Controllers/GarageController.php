@@ -30,7 +30,7 @@ class GarageController extends Controller
     public function byUser()
     {
         # code...
-        $garages = Garage::with('state')->where('user_id', auth()->user()->id)->orderBy('id', 'desc')->get();
+        $garages = Garage::with('state', 'images', 'tags')->where('user_id', auth()->user()->id)->orderBy('id', 'desc')->get();
         return response()->json($garages, 200);
     }
 
@@ -84,7 +84,7 @@ class GarageController extends Controller
             $filename = time() . '-' . $file->getClientOriginalName();
             $file->storeAs('photos', $filename, 'upload');
             $image = new Image();
-            $image->name = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
+            $image->name = $filename;
             $image->garage()->associate($garage);
             $image->save();
         }

@@ -17,16 +17,32 @@
               </l-map>
             </div>
           </div>
-
-          <h5 class="card-title text-primary">{{ myGarageData.title }}</h5>
-          <p class="card-text">{{ myGarageData.description }}</p>
-          <p><strong>Location:</strong> {{ myGarageData.postal }} {{ myGarageData.address }}, {{ myGarageData.city }}, {{ formatState }}</p>
-          <p><strong>Start Date:</strong> {{ this.$moment(myGarageData.startDate, 'YYYY-MM-DD').format('DD MMM YYYY') }}</p>
-          <p><strong>End Date:</strong> {{ this.$moment(myGarageData.endDate, 'YYYY-MM-DD').format('DD MMM YYYY') }}</p>
-          <p><strong>Hour:</strong> {{ this.$moment(myGarageData.startHour, 'HH:mm:ss').format('HH:mm a') }} - {{ this.$moment(myGarageData.endHour , 'HH:mm:ss').format('HH:mm a')}}</p>
-          <div class="text-right">
-            <button @click="back" class="btn btn-primary">Back</button>
+          <div class="row">
+            <div class="col-md-12">
+              <h5 class="card-title text-primary">{{ myGarageData.title }}</h5>
+              <p class="card-text">{{ myGarageData.description }}</p>
+              <p>
+                <span class="badge badge-info text-uppercase mx-1" v-for="tag in myGarageData.tags" :key="tag.id">
+                  {{ tag.name }}
+                </span>
+              </p>
+              <p><strong>Location:</strong> {{ myGarageData.postal }} {{ myGarageData.address }}, {{ myGarageData.city }}, {{ formatState }}</p>
+              <p><strong>Start Date:</strong> {{ this.$moment(myGarageData.startDate, 'YYYY-MM-DD').format('DD MMM YYYY') }}</p>
+              <p><strong>End Date:</strong> {{ this.$moment(myGarageData.endDate, 'YYYY-MM-DD').format('DD MMM YYYY') }}</p>
+              <p><strong>Hour:</strong> {{ this.$moment(myGarageData.startHour, 'HH:mm:ss').format('HH:mm a') }} - {{ this.$moment(myGarageData.endHour , 'HH:mm:ss').format('HH:mm a')}}</p>
+              <h6 class="text-primary text-center">Photos</h6>
+              <hr>
+              <div class="row">
+                <div class="col-md-4" v-for="photo in myGarageData.photos">
+                  <img :src="`../img/photos/${photo.name}`" alt="" height="200" width="200" class="img-thumbnail">
+                </div>
+              </div>
+              <div class="text-right">
+                <button @click="back" class="btn btn-primary">Back</button>
+              </div>
+            </div>
           </div>
+
         </div>
       </div>
     </transition>
