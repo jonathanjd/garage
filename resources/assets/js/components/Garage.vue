@@ -20,7 +20,7 @@
 
           <h5 class="card-title text-primary">{{ myGarageData.title }}</h5>
           <p class="card-text">{{ myGarageData.description }}</p>
-          <p><strong>Location:</strong> {{ myGarageData.postal }} {{ myGarageData.address }}, {{ myGarageData.city }}, {{ myGarageData.state }}</p>
+          <p><strong>Location:</strong> {{ myGarageData.postal }} {{ myGarageData.address }}, {{ myGarageData.city }}, {{ formatState }}</p>
           <p><strong>Start Date:</strong> {{ this.$moment(myGarageData.startDate, 'YYYY-MM-DD').format('DD MMM YYYY') }}</p>
           <p><strong>End Date:</strong> {{ this.$moment(myGarageData.endDate, 'YYYY-MM-DD').format('DD MMM YYYY') }}</p>
           <p><strong>Hour:</strong> {{ this.$moment(myGarageData.startHour, 'HH:mm:ss').format('HH:mm a') }} - {{ this.$moment(myGarageData.endHour , 'HH:mm:ss').format('HH:mm a')}}</p>
@@ -64,6 +64,10 @@ export default {
 
     myLatLng() {
       return L.latLng(this.myGarageData.location.lat, this.myGarageData.location.lng);
+    },
+
+    formatState() {
+      return this.myGarageData.state.name
     }
   },
 

@@ -58,6 +58,17 @@ class GarageOffController extends Controller
                 $image->save();
             }
 
+            $myArrayTags = explode(',', $request->tags);
+
+            foreach ($myArrayTags as $myTag) {
+                # code...
+                $tag = new Tag();
+                $tag->name = $myTag;
+                $tag->save();
+
+                $garage->tags()->sync($tag, false);
+            }
+
             return response()->json('Created', Response::HTTP_CREATED);
         }
 

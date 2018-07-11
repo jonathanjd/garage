@@ -35,6 +35,7 @@ export default {
   },
 
   created() {
+    window.scroll(0,0);
     this.files = [];
   },
 

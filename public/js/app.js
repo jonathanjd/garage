@@ -79105,6 +79105,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     };
   },
   created: function created() {
+    window.scroll(0, 0);
     this.$store.dispatch('loadTypeGarages');
     this.startDate = this.$moment().format('DD MMM YYYY');
     this.endDate = this.$moment().format('DD MMM YYYY');
@@ -79124,7 +79125,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       return this.$store.getters.getAlertMessageType;
     },
     showNewUser: function showNewUser() {
-      return this.userActive;
+      return !this.userActive;
     },
     validateTitle: function validateTitle() {
       return this.title.length >= 100;
@@ -81135,7 +81136,7 @@ var render = function() {
           ])
         ]),
         _vm._v(" "),
-        !_vm.showNewUser
+        _vm.showNewUser
           ? _c(
               "div",
               { key: "box4", staticClass: "card border-primary mt-4" },
@@ -81429,7 +81430,7 @@ exports = module.exports = __webpack_require__(0)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -81475,6 +81476,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     };
   },
   created: function created() {
+    window.scroll(0, 0);
     this.files = [];
   },
 
@@ -81666,7 +81668,7 @@ exports = module.exports = __webpack_require__(0)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -81762,6 +81764,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
   },
 
   created: function created() {
+    window.scroll(0, 0);
     this.myGarage = this.$store.getters.getGarageData;
   },
 
@@ -83175,6 +83178,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     },
     myLatLng: function myLatLng() {
       return L.latLng(this.myGarageData.location.lat, this.myGarageData.location.lng);
+    },
+    formatState: function formatState() {
+      return this.myGarageData.state.name;
     }
   },
 
@@ -83260,7 +83266,7 @@ var render = function() {
                   ", " +
                   _vm._s(_vm.myGarageData.city) +
                   ", " +
-                  _vm._s(_vm.myGarageData.state)
+                  _vm._s(_vm.formatState)
               )
             ]),
             _vm._v(" "),

@@ -72,7 +72,7 @@
           </div>
         </div>
     </div>
-    <div v-if="!showNewUser" class="card border-primary mt-4" key="box4">
+    <div v-if="showNewUser" class="card border-primary mt-4" key="box4">
       <div class="card-body">
         <h4>New User</h4>
         <app-message v-if="showAlertMessage" :myTitle="miAlertMessageTitle" :myTypeAlert="miAlertMessageType"></app-message>
@@ -144,6 +144,7 @@ export default {
   },
 
   created() {
+    window.scroll(0,0);
     this.$store.dispatch('loadTypeGarages');
     this.startDate = this.$moment().format('DD MMM YYYY');
     this.endDate = this.$moment().format('DD MMM YYYY');
@@ -166,7 +167,7 @@ export default {
     },
 
     showNewUser(){
-      return this.userActive;
+      return !this.userActive;
     },
 
     validateTitle() {
@@ -218,7 +219,6 @@ export default {
   methods: {
 
     userLogging() {
-
       axios.get('/api/search/user/logging').then( res => {
         this.userActive = res.data;
         this.$store.dispatch('loadUserActive', this.userActive);

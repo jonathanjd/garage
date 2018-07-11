@@ -100,10 +100,7 @@ class GarageController extends Controller
             $garage->tags()->sync($tag, false);
         }
 
-
-
         return response()->json('Created', Response::HTTP_CREATED);
-
     }
 
     /**
