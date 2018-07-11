@@ -12,6 +12,14 @@ use Symfony\Component\HttpFoundation\Response;
 
 class GarageOffController extends Controller
 {
+
+    public function show($id)
+    {
+        # code...
+        $garage = Garage::with('state', 'images', 'tags', 'user')->where('id', $id)->first();
+        return response()->json($garage, 200);
+    }
+
     //
     public function store(Request $request)
     {

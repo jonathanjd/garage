@@ -13,6 +13,8 @@
 
 Route::get('/', 'HomeController@index')->name('home');
 
+Route::get('show/{id}', 'HomeController@show')->name('show');
+
 Route::get('yard-sales', function () {
     return view('yard-sales');
 })->name('yard.sales');
@@ -33,6 +35,7 @@ Route::get('/api/search/user/logging', 'SearchController@searchUserLogging');
 Route::get('/api/search/user/email/verificar/{email}', 'SearchController@verificarEmail');
 
 Route::post('/api/garage', 'GarageOffController@store');
+Route::get('/api/garage/show/{id}', 'GarageOffController@show');
 
 Auth::routes();
 

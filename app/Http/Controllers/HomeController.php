@@ -16,7 +16,14 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $garages = Garage::orderBy('id', 'desc')->get();
+        $garages = Garage::orderBy('id', 'desc')->take(4)->get();
         return view('home')->with('garages', $garages);
     }
+
+    public function show($id)
+    {
+        # code...
+        return view('show')->with('id', $id);
+    }
+
 }

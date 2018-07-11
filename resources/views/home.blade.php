@@ -58,7 +58,7 @@
                                         <small class="badge badge-info text-uppercase mx-1">{{ $tag->name }}</small>
                                     @endforeach
                                 </p>
-                                <p class="card-text"><a href="#" class="btn btn-primary btn-block">More Info</a></p>
+                            <p class="card-text"><a href="{{ route('show', $garage->id) }}" class="btn btn-primary btn-block">More Info</a></p>
                             </div>
                         </div>
                     @endforeach

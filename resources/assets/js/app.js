@@ -32,9 +32,11 @@ import { store } from './store';
 
 import YardSale from './components/YardSale.vue'
 import SaleManage from './components/SaleManage.vue'
+import ShowGarage from './components/Show.vue'
 import DashBoardClient from './components/DashBoardClient.vue';
 Vue.component('YardSale', YardSale);
 Vue.component('SaleManage', SaleManage);
+Vue.component('ShowGarage', ShowGarage);
 Vue.component('DashBoardClient', DashBoardClient);
 
 const app = new Vue({

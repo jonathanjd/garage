@@ -29059,8 +29059,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__components_YardSale_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3__components_YardSale_vue__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_SaleManage_vue__ = __webpack_require__(20);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_SaleManage_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4__components_SaleManage_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__components_DashBoardClient_vue__ = __webpack_require__(127);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__components_DashBoardClient_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5__components_DashBoardClient_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__components_Show_vue__ = __webpack_require__(156);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__components_Show_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5__components_Show_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__components_DashBoardClient_vue__ = __webpack_require__(127);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__components_DashBoardClient_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6__components_DashBoardClient_vue__);
 /**
  * First we will load all of this project's JavaScript dependencies which
  * includes Vue and other libraries. It is a great starting point when
@@ -29096,9 +29098,11 @@ window.EventBus = new Vue();
 
 
 
+
 Vue.component('YardSale', __WEBPACK_IMPORTED_MODULE_3__components_YardSale_vue___default.a);
 Vue.component('SaleManage', __WEBPACK_IMPORTED_MODULE_4__components_SaleManage_vue___default.a);
-Vue.component('DashBoardClient', __WEBPACK_IMPORTED_MODULE_5__components_DashBoardClient_vue___default.a);
+Vue.component('ShowGarage', __WEBPACK_IMPORTED_MODULE_5__components_Show_vue___default.a);
+Vue.component('DashBoardClient', __WEBPACK_IMPORTED_MODULE_6__components_DashBoardClient_vue___default.a);
 
 var app = new Vue({
   el: '#app',
@@ -78198,7 +78202,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
   },
 
   mounted: function mounted() {
-    this.locationTest();
+    //this.locationTest();
   },
 
 
@@ -83497,6 +83501,338 @@ if (false) {
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 153 */,
+/* 154 */,
+/* 155 */,
+/* 156 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+function injectStyle (ssrContext) {
+  if (disposed) return
+  __webpack_require__(157)
+}
+var normalizeComponent = __webpack_require__(2)
+/* script */
+var __vue_script__ = __webpack_require__(159)
+/* template */
+var __vue_template__ = __webpack_require__(160)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = injectStyle
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources\\assets\\js\\components\\Show.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-745dfb18", Component.options)
+  } else {
+    hotAPI.reload("data-v-745dfb18", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 157 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(158);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__(1)("3a0ac614", content, false, {});
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-745dfb18\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./Show.vue", function() {
+     var newContent = require("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-745dfb18\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./Show.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+/* 158 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(0)(false);
+// imports
+exports.i(__webpack_require__(16), "");
+
+// module
+exports.push([module.i, "\r\n", ""]);
+
+// exports
+
+
+/***/ }),
+/* 159 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue2_leaflet__ = __webpack_require__(17);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue2_leaflet___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_vue2_leaflet__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      myGarage: [],
+      style: {
+        height: '300px'
+      },
+      zoom: 20,
+      center: [47.413220, -1.219482],
+      url: 'http://{s}.tile.osm.org/{z}/{x}/{y}.png',
+      attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',
+      marker: L.latLng(47.413220, -1.219482)
+    };
+  },
+
+
+  props: ['id'],
+
+  created: function created() {
+    this.fetchGarage();
+  },
+
+
+  methods: {
+    fetchGarage: function fetchGarage() {
+      var _this = this;
+
+      axios.get('/api/garage/show/' + this.id).then(function (res) {
+        _this.myGarage = res.data;
+        _this.center = [_this.myGarage.lat, _this.myGarage.lng];
+        _this.marker = L.latLng(_this.myGarage.lat, _this.myGarage.lng);
+      }).catch(function () {
+        console.log('Error');
+      });
+    }
+  },
+
+  components: {
+    LMap: __WEBPACK_IMPORTED_MODULE_0_vue2_leaflet__["LMap"],
+    LTileLayer: __WEBPACK_IMPORTED_MODULE_0_vue2_leaflet__["LTileLayer"],
+    LMarker: __WEBPACK_IMPORTED_MODULE_0_vue2_leaflet__["LMarker"]
+  }
+});
+
+/***/ }),
+/* 160 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", [
+    _c("div", { staticClass: "row" }, [
+      _c(
+        "div",
+        { staticClass: "col my-4" },
+        [
+          _c(
+            "l-map",
+            { style: _vm.style, attrs: { zoom: _vm.zoom, center: _vm.center } },
+            [
+              _c("l-tile-layer", {
+                attrs: { url: _vm.url, attribution: _vm.attribution }
+              }),
+              _vm._v(" "),
+              _c("l-marker", { attrs: { "lat-lng": _vm.marker } })
+            ],
+            1
+          )
+        ],
+        1
+      )
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "row" }, [
+      _c("div", { staticClass: "col-md-12" }, [
+        _c("h5", { staticClass: "card-title text-primary" }, [
+          _vm._v(_vm._s(_vm.myGarage.title))
+        ]),
+        _vm._v(" "),
+        _c("p", { staticClass: "card-text" }, [
+          _vm._v(_vm._s(_vm.myGarage.description))
+        ]),
+        _vm._v(" "),
+        _c(
+          "p",
+          _vm._l(_vm.myGarage.tags, function(tag) {
+            return _c(
+              "span",
+              {
+                key: tag.id,
+                staticClass: "badge badge-info text-uppercase mx-1"
+              },
+              [_vm._v("\n          " + _vm._s(tag.name) + "\n        ")]
+            )
+          })
+        ),
+        _vm._v(" "),
+        _vm.myGarage.state
+          ? _c("p", [
+              _c("strong", [_vm._v("Location:")]),
+              _vm._v(
+                " " +
+                  _vm._s(_vm.myGarage.address) +
+                  " " +
+                  _vm._s(_vm.myGarage.postal) +
+                  ", " +
+                  _vm._s(_vm.myGarage.city) +
+                  ", " +
+                  _vm._s(_vm.myGarage.state.name)
+              )
+            ])
+          : _vm._e(),
+        _vm._v(" "),
+        _c("p", [
+          _c("strong", [_vm._v("Start Date:")]),
+          _vm._v(
+            " " +
+              _vm._s(
+                this.$moment(_vm.myGarage.startdate, "YYYY-MM-DD").format(
+                  "DD MMM YYYY"
+                )
+              )
+          )
+        ]),
+        _vm._v(" "),
+        _c("p", [
+          _c("strong", [_vm._v("End Date:")]),
+          _vm._v(
+            " " +
+              _vm._s(
+                this.$moment(_vm.myGarage.enddate, "YYYY-MM-DD").format(
+                  "DD MMM YYYY"
+                )
+              )
+          )
+        ]),
+        _vm._v(" "),
+        _c("p", [
+          _c("strong", [_vm._v("Hour: ")]),
+          _vm._v(
+            _vm._s(
+              this.$moment(_vm.myGarage.starthour, "HH:mm:ss").format("HH:mm a")
+            ) +
+              " - " +
+              _vm._s(
+                this.$moment(_vm.myGarage.endhour, "HH:mm:ss").format("HH:mm a")
+              )
+          )
+        ]),
+        _vm._v(" "),
+        _c("h6", { staticClass: "text-primary text-center" }, [
+          _vm._v("Photos")
+        ]),
+        _vm._v(" "),
+        _c("hr"),
+        _vm._v(" "),
+        _c(
+          "div",
+          { staticClass: "row" },
+          _vm._l(_vm.myGarage.images, function(photo) {
+            return _c("div", { staticClass: "col-md-4" }, [
+              _c("img", {
+                staticClass: "img-thumbnail",
+                attrs: {
+                  src: "../img/photos/" + photo.name,
+                  alt: "",
+                  height: "200",
+                  width: "200"
+                }
+              })
+            ])
+          })
+        )
+      ])
+    ])
+  ])
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-745dfb18", module.exports)
+  }
+}
 
 /***/ })
 /******/ ]);
