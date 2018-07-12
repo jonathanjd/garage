@@ -15,7 +15,7 @@
                 <button class="btn btn-outline-primary mb-2">Buscar</button>
             </form>
             <p class="lead text-center">Having a sale of your own?
-                <a href="#">List it here for free!</a>
+                <a href="{{ route('sale.manage') }}">List it here for free!</a>
             </p>
         </div>
     </div>

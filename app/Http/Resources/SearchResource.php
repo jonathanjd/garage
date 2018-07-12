@@ -15,6 +15,13 @@ class SearchResource extends Resource
     public function toArray($request)
     {
         return [
+            'id' => $this->id,
+            'address' => $this->address,
+            'title' => $this->title,
+            'starthour' => $this->starthour,
+            'endhour' => $this->endhour,
+            'images' => $this->images,
+            'tags' => $this->tags,
             'lat' => $this->lat,
             'lng' => $this->lng,
             'state' => $this->state,

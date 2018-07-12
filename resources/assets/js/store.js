@@ -40,9 +40,19 @@ export const store = new Vuex.Store({
       password: ''
     },
     userActive: false,
+    mapCenter: [36.116203, -119.681564],
+    mapZoom: 6
   },
 
   mutations: {
+
+    setMapCenter(state, payload) {
+      state.mapCenter = payload;
+    },
+
+    setMapZoom(state, payload) {
+      state.mapZoom = payload;
+    },
 
     setUserActive(state, payload){
       state.userActive = payload;
@@ -146,6 +156,14 @@ export const store = new Vuex.Store({
 
   getters: {
 
+    getMapCenter(state) {
+      return state.mapCenter;
+    },
+
+    getMapZoom(state) {
+      return state.mapZoom;
+    },
+
     getUserActive(state) {
       return state.userActive;
     },
@@ -190,6 +208,14 @@ export const store = new Vuex.Store({
 
   actions: {
 
+    loadMapCenter({commit}, payload) {
+      commit('setMapCenter', payload);
+    },
+
+    loadMapZoom({commit}, payload) {
+      commit('setMapZoom', payload);
+    },
+
     loadUserActive({commit}, payload) {
       commit('setUserActive', payload);
     },
@@ -201,8 +227,28 @@ export const store = new Vuex.Store({
     loadSearchPostal({commit}, payload) {
       return new Promise((resolve, reject) => {
         axios.get('/api/search/code/'.concat(payload)).then( res => {
-          commit('setSearchGarages', res.data);
-          resolve()
+
+          if (res.data === false) {
+            reject();
+          } else {
+            commit('setSearchGarages', res.data);
+            resolve()
+          }
+        }).catch( () => {
+          reject();
+        })
+      });
+    },
+
+    loadSearchAddress({commit}, payload) {
+      return new Promise((resolve, reject) => {
+        axios.get(`/api/search/address/${payload}`).then( res => {
+          if (res.data === false) {
+            reject();
+          }else {
+            commit('setSearchGarages', res.data);
+            resolve()
+          }
         }).catch( () => {
           reject();
         })

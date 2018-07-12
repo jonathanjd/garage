@@ -17,7 +17,26 @@ class SearchController extends Controller
     {
         # code...
         $searchCode = Garage::with('state')->where('postal', $code)->get();
-        return response()->json(SearchResource::collection($searchCode), 200);
+        if ($searchCode->count() > 0) {
+            # code...
+            return response()->json(SearchResource::collection($searchCode), 200);
+        } else {
+            # code...
+            return response()->json(false, 200);
+        }
+    }
+
+    public function searchAdrress($address)
+    {
+        # code...
+        $searcAddress = Garage::with('state')->where('address', $address)->get();
+        if ($searcAddress->count() > 0) {
+            # code...
+            return response()->json(SearchResource::collection($searcAddress), 200);
+        } else {
+            # code...
+            return response()->json(false, 200);
+        }
     }
 
     public function searchUserLogging()
