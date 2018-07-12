@@ -31,6 +31,11 @@ Route::get('contact', function () {
     return view('contacto');
 })->name('contact');
 
+Route::get('search/{search}', 'HomeController@search')->name('search');
+
+Route::get('address/{address}', 'HomeController@address')->name('address');
+Route::get('/api/address/{address}', 'HomeController@searchAddress');
+
 Route::get('/api/search/user/logging', 'SearchController@searchUserLogging');
 Route::get('/api/search/user/email/verificar/{email}', 'SearchController@verificarEmail');
 

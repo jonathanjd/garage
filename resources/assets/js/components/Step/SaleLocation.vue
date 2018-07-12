@@ -20,7 +20,7 @@
               <div class="col">
                 <select class="form-control" v-model="formData.state" id="exampleFormControlSelect1">
                   <option value="selected" disabled selected>State</option>
-                  <option v-for="state in listState" :value="state.id">{{ state.code }}</option>
+                  <option value="5">CA</option>
                 </select>
               </div>
               <div class="col">

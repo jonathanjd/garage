@@ -19,8 +19,8 @@ class CreateGarageTagTable extends Migration
             $table->integer('garage_id')->unsigned();
             $table->integer('tag_id')->unsigned();
 
-            $table->foreign('garage_id')->references('id')->on('garages');
-            $table->foreign('tag_id')->references('id')->on('tags');
+            $table->foreign('garage_id')->references('id')->on('garages')->onDelete('cascade');
+            $table->foreign('tag_id')->references('id')->on('tags')->onDelete('cascade');
 
             $table->timestamps();
         });

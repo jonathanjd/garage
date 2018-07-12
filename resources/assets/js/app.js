@@ -34,10 +34,12 @@ import YardSale from './components/YardSale.vue'
 import SaleManage from './components/SaleManage.vue'
 import ShowGarage from './components/Show.vue'
 import DashBoardClient from './components/DashBoardClient.vue';
+import Address from './components/Address.vue';
 Vue.component('YardSale', YardSale);
 Vue.component('SaleManage', SaleManage);
 Vue.component('ShowGarage', ShowGarage);
 Vue.component('DashBoardClient', DashBoardClient);
+Vue.component('AppAddress', Address);
 
 const app = new Vue({
     el: '#app',

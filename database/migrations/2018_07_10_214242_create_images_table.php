@@ -18,7 +18,7 @@ class CreateImagesTable extends Migration
             $table->string('name');
 
             $table->integer('garage_id')->unsigned();
-            $table->foreign('garage_id')->references('id')->on('garages');
+            $table->foreign('garage_id')->references('id')->on('garages')->onDelete('cascade');
 
             $table->timestamps();
         });

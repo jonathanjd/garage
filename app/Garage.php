@@ -48,4 +48,30 @@ class Garage extends Model
         return $this->belongsToMany(Tag::class);
     }
 
+    //Mutators
+    public function setAddressAttribute($value)
+    {
+        # code...
+        $this->attributes['address'] = strtolower($value);
+    }
+
+    public function setCityAttribute($value)
+    {
+        # code...
+        $this->attributes['city'] = strtolower($value);
+    }
+
+    //Accessors
+    public function getCityAttribute($value)
+    {
+        # code...
+        return ucwords($value);
+    }
+
+    public function getAddressAttribute($value)
+    {
+        # code...
+        return ucwords($value);
+    }
+
 }
