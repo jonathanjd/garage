@@ -3,28 +3,34 @@
     <div class="card bg-light">
       <div class="card-body">
         <h5 class="text-center">Garage Sale</h5>
-        <p class="text-center"><strong>{{ showMyWeek }}</strong></p>
-        <hr>
         <div class="row">
-          <div class="col-md-4">
+          <div class="col">
             <div class="form-group">
-              <div class="btn-group hidden-xs" role="group">
-                <button @click="chanceButton('all')" type="button" data-toggle="button" :class="[btnAll ? 'btn btn-success' : 'btn btn-secondary']">*</button>
-                <button @click="chanceButton('Sun')" type="button" data-toggle="button" :class="[btnSun ? 'btn btn-success' : 'btn btn-secondary']">Sun</button>
-                <button @click="chanceButton('Mon')" type="button" data-toggle="button" :class="[btnMon ? 'btn btn-success' : 'btn btn-secondary']">Mon</button>
-                <button @click="chanceButton('Tues')" type="button" data-toggle="button" :class="[btnTues ? 'btn btn-success' : 'btn btn-secondary']">Tues</button>
-                <button @click="chanceButton('Wed')" type="button" data-toggle="button" :class="[btnWed ? 'btn btn-success' : 'btn btn-secondary']">Wed</button>
-                <button @click="chanceButton('Thurs')" type="button" data-toggle="button" :class="[btnThurs ? 'btn btn-success' : 'btn btn-secondary']">Thurs</button>
-                <button @click="chanceButton('Fri')" type="button" data-toggle="button" :class="[btnFri ? 'btn btn-success' : 'btn btn-secondary']">Fri</button>
-                <button @click="chanceButton('Sat')" type="button" data-toggle="button" :class="[btnSat ? 'btn btn-success' : 'btn btn-secondary']">Sat</button>
+              <label for="">Tags</label>
+              <app-tags-input element-id="tags" v-model="selectedTags" input-class="form-control" placeholder="Example: Books + Enter" :limit="4" :delete-on-backspace="true"></app-tags-input>
+              <small id="emailHelp" class="form-text text-muted">Whether deleting tags by pressing Backspace(<font-awesome-icon :icon="myIcon"></font-awesome-icon>) is allowed.</small>
+            </div>
+          </div>
+          <div class="col">
+
+            <div class="form-group">
+                <label for="">Start Date</label>
+                <datepicker calendar-button bootstrap-styling @closed="validateDatePicker1" name="datepicker1" v-model="startDate" :input-class="[myDataPicker1 ? 'form-control is-invalid' : 'form-control']" :value="startDate"></datepicker>
+                <div v-if="showDatapicker1" class="invalid-data">Invalid Date.</div>
               </div>
-            </div>
+          </div>
+          <div class="col">
             <div class="form-group">
-              <app-tags-input input-class="form-control" placeholder="Example: Books + Enter" :limit="4" :delete-on-backspace="true"></app-tags-input>
-            </div>
-            <button class="btn btn-primary">Search</button>
+                <label for="">End Date</label>
+                <datepicker calendar-button bootstrap-styling @closed="validateDatePicker2" name="datepicker2" v-model="endDate" :input-class="[myDataPicker2 ? 'form-control is-invalid' : 'form-control']" :value="endDate"></datepicker>
+                <div v-if="showDatapicker2" class="invalid-data">Invalid Date.</div>
+              </div>
           </div>
         </div>
+
+        </div>
+        <div class="card-footer">
+          <button class="btn btn-primary btn-block">Search</button>
         </div>
     </div>
   </div>
@@ -32,84 +38,81 @@
 
 <script>
 import TagsInput from '@voerro/vue-tagsinput';
+import Datepicker from 'vuejs-datepicker';
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
+import { faBackspace } from '@fortawesome/free-solid-svg-icons';
+
 export default {
 
 
   data(){
     return {
-      dateWeek: null,
-      btnAll: false,
-      btnSun: false,
-      btnMon: false,
-      btnTues: false,
-      btnWed: false,
-      btnThurs: false,
-      btnFri: false,
-      btnSat: false,
+      selectedTags: [],
+      startDate: '',
+      endDate: '',
+      myDataPicker1: false,
+      myDataPicker2: false,
+      myIcon: faBackspace,
+      style: {
+        position: "relative"
+      }
     }
   },
 
   created() {
-    this.dateWeek = this.$moment();
+    this.startDate = this.$moment().format('DD MMM YYYY');
+    this.endDate = this.$moment().format('DD MMM YYYY');
   },
 
-  computed : {
-    showMyWeek() {
-      return `${this.dateWeek.startOf('week').format('D MMM YYYY')} to ${this.dateWeek.endOf('week').format('D MMM YYYY')}`;
-    }
+  computed: {
+
+    showDatapicker1() {
+      return this.myDataPicker1;
+    },
+
+    showDatapicker2() {
+      return this.myDataPicker2;
+    },
+
   },
 
   methods: {
-    chanceButton(value){
 
-      if (value === 'all') {
-        this.btnAll = !this.btnAll
-        this.btnSun = false;
-        this.btnMon = false;
-        this.btnTues = false;
-        this.btnWed = false;
-        this.btnThurs = false;
-        this.btnFri = false;
-        this.btnSat = false;
+    validateDatePicker1(){
+      this.myDataPicker1 = false;
+      this.myDataPicker2 = false;
+      if (this.$moment(this.startDate,'DD MMM YYYY').isAfter(this.$moment(this.endDate, 'DD MMM YYYY'))) {
+        this.myDataPicker1 = true;
       }
-      if (value === 'Sun') {
-        this.btnSun = !this.btnSun
-        this.btnAll = false
-      }
-      if (value === 'Mon') {
-        this.btnMon = !this.btnMon
-        this.btnAll = false
-      }
-      if (value === 'Tues') {
-        this.btnTues = !this.btnTues
-        this.btnAll = false
-      }
-      if (value === 'Wed') {
-        this.btnWed = !this.btnWed
-        this.btnAll = false
-      }
-      if (value === 'Thurs') {
-        this.btnThurs = !this.btnThurs
-        this.btnAll = false
-      }
-      if (value === 'Fri') {
-        this.btnFri = !this.btnFri
-        this.btnAll = false
-      }
-      if (value === 'Sat') {
-        this.btnSat = !this.btnSat
-        this.btnAll = false
-      }
+    },
 
-    }
+    validateDatePicker2(){
+      this.myDataPicker1 = false;
+      this.myDataPicker2 = false;
+      if (this.$moment(this.endDate,'DD MMM YYYY').isBefore(this.$moment(this.startDate, 'DD MMM YYYY'))) {
+        this.myDataPicker2 = true;
+      }
+    },
+
   },
 
   components: {
-    appTagsInput: TagsInput
+    appTagsInput: TagsInput,
+    Datepicker,
+    FontAwesomeIcon
   }
 
 }
 </script>
 
 <style>
+.vdp-datepicker__calendar {
+  z-index: 9000;
+}
+.invalid-data {
+  width: 100%;
+  margin-top: 0.25rem;
+  font-size: 80%;
+  color: #dc3545;
+}
 </style>
