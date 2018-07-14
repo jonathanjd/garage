@@ -10,8 +10,9 @@
     <div class="jumbotron jumbotron-fluid">
         <div class="container">
             <h1 class="text-center display-4">Find garage sales near you!</h1>
-            <form action="" class="form-inline justify-content-center my-4">
-                <input type="text" class="form-control form-control-lg mb-2 mr-sm-2" id="inlineFormInputName2" placeholder="Address or Zip Code">
+            <form action="{{ route('search') }}" method="GET" class="form-inline justify-content-center my-4">
+                {{ csrf_field() }}
+                <input type="text" name="search" class="form-control form-control-lg mb-2 mr-sm-2" id="inlineFormInputName2" placeholder="Address or Zip Code">
                 <button class="btn btn-outline-primary mb-2">Buscar</button>
             </form>
             <p class="lead text-center">Having a sale of your own?

@@ -1,5 +1,5 @@
 <template>
-  <div class="container-fluid">
+  <div class="container">
     <div class="row">
       <div class="col-md-12">
         <app-search></app-search>
@@ -71,7 +71,7 @@ export default {
 
   methods: {
     info(id){
-
+      window.location.replace(window.location.origin + '/show/' + id);
     }
   },
 

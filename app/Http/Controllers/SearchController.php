@@ -39,6 +39,24 @@ class SearchController extends Controller
         }
     }
 
+    public function searchSale(Request $request)
+    {
+        # code...
+        $myArrayTags = explode(',', $request->tags);
+        $from = $request->startDate;
+        $to = $request->endDate;
+
+        $garages = Garage::with('images')
+            ->whereHas('tags', function ($query) use ($myArrayTags) {
+                $query->whereIn('name', $myArrayTags);
+            })
+            ->whereBetween('enddate', [$from, $to])
+            ->orderBy('id', 'desc')
+            ->get();
+
+        return response()->json(SearchResource::collection($garages), 200);
+    }
+
     public function searchUserLogging()
     {
         # code...

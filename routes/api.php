@@ -17,3 +17,4 @@ Route::apiResource('/type-garage', 'TypeGarageController');
 Route::apiResource('/state', 'StateController', ['only' => 'index']);
 Route::get('/search/code/{code}', 'SearchController@searchCode');
 Route::get('/search/address/{address}', 'SearchController@searchAdrress');
+Route::post('/search/sale', 'SearchController@searchSale');

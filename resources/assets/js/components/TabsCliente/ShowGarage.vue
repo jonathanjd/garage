@@ -8,7 +8,7 @@
       <p><strong>Hour:</strong> {{ myHourInfo }}</p>
       <div class="text-right">
         <button @click="show" class="btn btn-info">Show</button>
-        <button class="btn btn-warning">Edit</button>
+        <button @click="edit" class="btn btn-warning">Edit</button>
         <button @click="destroy(myGarage.id)" class="btn btn-outline-danger">Delete</button>
       </div>
     </div>
@@ -35,6 +35,12 @@ export default {
   },
 
   methods: {
+
+    edit() {
+      this.$store.dispatch('loadGarageId', this.myGarage.id);
+      EventBus.$emit('changeMyDashboard');
+      EventBus.$emit('editGarage', true);
+    },
 
     show(){
 

@@ -7,7 +7,7 @@
 
 <!-- Section Contact -->
 <section id="contact">
-  <div class="container-fluid">
+  <div class="container">
     <div class="row">
       <div class="col-md-12">
         <div class="card border-primary mb-3">

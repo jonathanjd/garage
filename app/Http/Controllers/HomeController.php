@@ -6,6 +6,7 @@ use App\Garage;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Http\Resources\AddressResource;
+use App\Http\Resources\SearchResource;
 
 class HomeController extends Controller
 {
@@ -27,10 +28,22 @@ class HomeController extends Controller
         return view('show')->with('id', $id);
     }
 
-    public function search()
+    public function search(Request $request)
     {
         # code...
-        return view('search');
+        return view('search')->with('search', $request->search);
+    }
+
+    public function apiSearchGarage($search)
+    {
+        # code...
+        $garages = Garage::with('images', 'tags')
+            ->where('address', $search)
+            ->orWhere('postal', $search)
+            ->orderBy('id', 'desc')
+            ->get();
+
+        return response()->json(SearchResource::collection($garages), 200);
     }
 
     public function address($address)

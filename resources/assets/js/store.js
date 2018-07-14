@@ -5,6 +5,7 @@ Vue.use(Vuex);
 export const store = new Vuex.Store({
   // ...
   state: {
+    garageId: null,
     garageData: {
       location: {
         lat: null,
@@ -45,6 +46,10 @@ export const store = new Vuex.Store({
   },
 
   mutations: {
+
+    setGarageId(state, payload) {
+      state.garageId = payload;
+    },
 
     setMapCenter(state, payload) {
       state.mapCenter = payload;
@@ -156,6 +161,10 @@ export const store = new Vuex.Store({
 
   getters: {
 
+    getGarageId(state) {
+      return state.garageId;
+    },
+
     getMapCenter(state) {
       return state.mapCenter;
     },
@@ -208,6 +217,10 @@ export const store = new Vuex.Store({
 
   actions: {
 
+    loadGarageId({commit}, payload) {
+      commit('setGarageId', payload);
+    },
+
     loadMapCenter({commit}, payload) {
       commit('setMapCenter', payload);
     },
@@ -222,6 +235,10 @@ export const store = new Vuex.Store({
 
     loadNewUser({commit}, payload) {
       commit('setNewUser', payload);
+    },
+
+    loadSearchSale({commit}, payload) {
+      commit('setSearchGarages', payload);
     },
 
     loadSearchPostal({commit}, payload) {

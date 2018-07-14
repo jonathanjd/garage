@@ -135,6 +135,45 @@ class GarageController extends Controller
     public function update(Request $request, $id)
     {
         //
+
+        $garage = Garage::find($id);
+        $garage->address = $request->address;
+        $garage->city = $request->city;
+        $garage->postal = $request->postal;
+        $garage->lat = $request->lat;
+        $garage->lng = $request->lng;
+
+        $garage->title = $request->title;
+        $garage->description = $request->description;
+
+        $garage->startdate = $request->startdate;
+        $garage->enddate = $request->enddate;
+        $garage->starthour = $request->starthour;
+        $garage->endhour = $request->endhour;
+
+        $garage->state_id = $request->state;
+        $garage->type_garage_id = $request->type_garage_id;
+        $garage->user_id = auth()->user()->id;
+
+        $garage->save();
+
+        $myArrayTags = $request->tags;
+
+        foreach ($garage->tags as $tag) {
+            # code...
+            $tag->delete();
+        }
+
+        foreach ($myArrayTags as $myTag) {
+            # code...
+            $tag = new Tag();
+            $tag->name = $myTag;
+            $tag->save();
+
+            $garage->tags()->sync($tag, false);
+        }
+
+        return response()->json('Updated', Response::HTTP_ACCEPTED);
     }
 
     /**

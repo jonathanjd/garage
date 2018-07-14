@@ -3,10 +3,16 @@
     <div class="card bg-light">
       <div class="card-body">
         <h5 class="text-center">Garage Sale</h5>
+        <div v-if="messageShow"  class="alert alert-info alert-dismissible fade show" role="alert">
+          <strong>Garage Sale!</strong> {{ messageText }}.
+          <button @click="close" type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
         <div class="row">
           <div class="col">
             <div class="form-group">
-              <label for="">Tags</label>
+              <label for="">Tags*</label>
               <app-tags-input element-id="tags" v-model="selectedTags" input-class="form-control" placeholder="Example: Books + Enter" :limit="4" :delete-on-backspace="true"></app-tags-input>
               <small id="emailHelp" class="form-text text-muted">Whether deleting tags by pressing Backspace(<font-awesome-icon :icon="myIcon"></font-awesome-icon>) is allowed.</small>
             </div>
@@ -30,7 +36,7 @@
 
         </div>
         <div class="card-footer">
-          <button class="btn btn-primary btn-block">Search</button>
+          <button @click="buscar" class="btn btn-primary btn-block" :disabled="validarButton">Search</button>
         </div>
     </div>
   </div>
@@ -55,7 +61,10 @@ export default {
       myIcon: faBackspace,
       style: {
         position: "relative"
-      }
+      },
+      myForm: new FormData,
+      messageShow: false,
+      messageText: 'No Hay Resultado',
     }
   },
 
@@ -65,6 +74,10 @@ export default {
   },
 
   computed: {
+
+    validarButton() {
+      return this.selectedTags.length < 1;
+    },
 
     showDatapicker1() {
       return this.myDataPicker1;
@@ -77,6 +90,35 @@ export default {
   },
 
   methods: {
+
+    close() {
+      this.messageShow = false;
+    },
+
+    buscar() {
+
+      const startDate = this.$moment(this.startDate).format('YYYY-MM-DD');
+      const endDate = this.$moment(this.endDate).format('YYYY-MM-DD');
+      const tags = this.selectedTags;
+
+      this.myForm.append('startDate', startDate);
+      this.myForm.append('endDate', endDate);
+      this.myForm.append('tags', tags);
+      EventBus.$emit('changeShowMap', false);
+      axios.post('/api/search/sale', this.myForm).then( res => {
+        this.$store.dispatch('loadSearchSale', res.data);
+        const lat = this.$store.getters.getSearchGarages[0].lat;
+        const lng = this.$store.getters.getSearchGarages[0].lng;
+        this.$store.dispatch('loadMapCenter', [lat, lng]);
+        this.$store.dispatch('loadMapZoom', 8);
+        EventBus.$emit('changeShowMap', true);
+      }).catch( () => {
+        this.messageShow = true;
+        this.messageText = `There are no results matching your search: ${this.selectedTags}`;
+        EventBus.$emit('changeShowMap', true);
+      });
+
+    },
 
     validateDatePicker1(){
       this.myDataPicker1 = false;

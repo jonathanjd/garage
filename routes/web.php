@@ -31,7 +31,8 @@ Route::get('contact', function () {
     return view('contacto');
 })->name('contact');
 
-Route::get('search/{search}', 'HomeController@search')->name('search');
+Route::get('search', 'HomeController@search')->name('search');
+Route::get('/api/search/garages/{search}', 'HomeController@apiSearchGarage');
 
 Route::get('address/{address}', 'HomeController@address')->name('address');
 Route::get('/api/address/{address}', 'HomeController@searchAddress');
@@ -50,4 +51,5 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
     })->name('dashboard');
     Route::get('/api/garage/by-user', 'GarageController@byUser');
     Route::apiResource('/api/garage', 'GarageController');
+    Route::apiResource('garage.image', 'GarageImageController');
 });

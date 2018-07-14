@@ -35,11 +35,13 @@ import SaleManage from './components/SaleManage.vue'
 import ShowGarage from './components/Show.vue'
 import DashBoardClient from './components/DashBoardClient.vue';
 import Address from './components/Address.vue';
+import SearchGarage from './components/Search/SearchGarage.vue';
 Vue.component('YardSale', YardSale);
 Vue.component('SaleManage', SaleManage);
 Vue.component('ShowGarage', ShowGarage);
 Vue.component('DashBoardClient', DashBoardClient);
 Vue.component('AppAddress', Address);
+Vue.component('SearchGarage', SearchGarage);
 
 const app = new Vue({
     el: '#app',

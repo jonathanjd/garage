@@ -37,6 +37,9 @@
     <template v-else-if="showMyGarage">
       <app-garage></app-garage>
     </template>
+    <template v-else-if="myEditGarage">
+      <app-edit-garage></app-edit-garage>
+    </template>
     <template v-else>
       <app-sale-manage></app-sale-manage>
     </template>
@@ -47,13 +50,15 @@
 import AccountSettings from './TabsCliente/AccountSettings';
 import YourSalesTab from './TabsCliente/YourSalesTab';
 import SaleManage from './SaleManage';
+import EditGarage from './Edit/EditGarage';
 import Garage from './Garage';
 export default {
 
   data(){
     return {
       myDashboard: true,
-      myGarage: false
+      myGarage: false,
+      myEditGarage: false,
     }
   },
 
@@ -66,6 +71,9 @@ export default {
     });
     EventBus.$on('showGarage', (payload) => {
       this.myGarage = payload;
+    });
+    EventBus.$on('editGarage', (payload) => {
+      this.myEditGarage = payload;
     });
   },
 
@@ -82,6 +90,7 @@ export default {
   components: {
     appAccountSettings: AccountSettings,
     appYourSalesTab: YourSalesTab,
+    appEditGarage: EditGarage,
     appSaleManage: SaleManage,
     appGarage: Garage
   }
