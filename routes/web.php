@@ -31,6 +31,8 @@ Route::get('contact', function () {
     return view('contacto');
 })->name('contact');
 
+Route::get('send-email', 'HomeController@mail')->name('send.email');
+
 Route::get('search', 'HomeController@search')->name('search');
 Route::get('/api/search/garages/{search}', 'HomeController@apiSearchGarage');
 

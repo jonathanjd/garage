@@ -4,9 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Garage;
 use Carbon\Carbon;
+use App\Mail\SendMail;
 use Illuminate\Http\Request;
-use App\Http\Resources\AddressResource;
+use Illuminate\Support\Facades\Mail;
 use App\Http\Resources\SearchResource;
+use App\Http\Resources\AddressResource;
 
 class HomeController extends Controller
 {
@@ -65,6 +67,25 @@ class HomeController extends Controller
             $data = [];
             return response()->json(false, 200);
         }
+    }
+
+    public function mail(Request $request)
+    {
+        # code...
+
+        $this->validate($request, [
+            'name' => 'required|max:255',
+            'email' => 'required|email',
+            'message' => 'required|max:2000'
+        ]);
+
+        $name = $request->name;
+        $email = $request->email;
+        $message = $request->message;
+
+        Mail::to('headjd@gmail.com')->send(new SendMail($name, $email, $message));
+        return redirect()->back()->with('flashMessage', 'Your message has been send successfully');
+
     }
 
 }
